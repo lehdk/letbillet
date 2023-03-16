@@ -29,6 +29,9 @@
          </font></TextField>
       <Button layoutX="165.0" layoutY="213.0" mnemonicParsing="false" text="Login" />
       <Button layoutX="122.0" layoutY="254.0" mnemonicParsing="false" text="Continue as customer" />
-      <Button layoutX="349.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleExit" text="X" />
+      <Button fx:id="exitButton" layoutX="349.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleExit" text="X">
+         <font>
+            <Font size="17.0" />
+         </font></Button>
    </children>
 </AnchorPane>
