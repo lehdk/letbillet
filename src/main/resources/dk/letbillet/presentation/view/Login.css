@@ -1,0 +1,23 @@
+#pane {
+    -fx-background-color: #13005A;
+}
+
+Label {
+    -fx-text-fill: white;
+}
+
+.input {
+    -fx-background-color: #00337C;
+    -fx-text-fill: white;
+}
+
+Button {
+    -fx-background-color: #1C82AD;
+}
+
+Button:hover {
+   -fx-scale-x: 1.08;
+   -fx-scale-y: 1.08;
+   -fx-scale-z: 1.08;
+    -fx-cursor: hand;
+}
