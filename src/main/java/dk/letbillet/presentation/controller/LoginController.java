@@ -5,6 +5,8 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -15,6 +17,15 @@ public class LoginController implements Initializable {
     @FXML
     public Button exitButton;
 
+    @FXML
+    public Button loginButton;
+
+    @FXML
+    public TextField usernameField;
+
+    @FXML
+    public PasswordField passwordField;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -23,10 +34,17 @@ public class LoginController implements Initializable {
 
             exitButton.setGraphic(icon);
             exitButton.setText("");
-        } catch (Exception ignored) {
+        } catch (Exception ignored) { }
 
-        }
+        usernameField.textProperty().addListener(((observable, oldValue, newValue) -> setLoginButtonEnableState()));
+        passwordField.textProperty().addListener(((observable, oldValue, newValue) -> setLoginButtonEnableState()));
+    }
 
+    private void setLoginButtonEnableState() {
+        boolean usernameOk = usernameField.textProperty().getValue().length() > 0;
+        boolean passwordOk = passwordField.textProperty().getValue().length() > 1;
+
+        loginButton.setDisable(!(usernameOk && passwordOk));
     }
 
     public void handleExit() {
