@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="pane" prefHeight="350.0" prefWidth="375.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.letbillet.presentation.controller.LoginController">
+   <children>
+      <Label layoutX="112.0" layoutY="14.0" styleClass="white" text="Letbillet">
+         <font>
+            <Font size="43.0" />
+         </font></Label>
+      <Label layoutX="29.0" layoutY="107.0" text="Username">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="34.0" layoutY="154.0" text="Password">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <PasswordField layoutX="113.0" layoutY="155.0" prefHeight="25.0" prefWidth="224.0" styleClass="input">
+         <font>
+            <Font size="13.0" />
+         </font></PasswordField>
+      <TextField layoutX="113.0" layoutY="108.0" prefHeight="25.0" prefWidth="224.0" styleClass="input">
+         <font>
+            <Font size="13.0" />
+         </font></TextField>
+      <Button layoutX="165.0" layoutY="213.0" mnemonicParsing="false" text="Login" />
+      <Button layoutX="122.0" layoutY="254.0" mnemonicParsing="false" text="Continue as customer" />
+      <Button fx:id="exitButton" layoutX="349.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleExit" text="X">
+         <font>
+            <Font size="17.0" />
+         </font></Button>
+   </children>
+</AnchorPane>
