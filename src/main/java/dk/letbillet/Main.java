@@ -1,5 +1,8 @@
 package dk.letbillet;
 
+import dk.letbillet.database.DatabaseConnectionHandler;
+import dk.letbillet.util.PropertyLoader;
+import dk.letbillet.util.PropertyResult;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +20,20 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
+        PropertyResult properties;
+        try {
+            properties = PropertyLoader.loadProperties();
+            if(properties == null) {
+                System.exit(-1);
+            }
+            DatabaseConnectionHandler.initialize(properties);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
+
+
         var loader = new FXMLLoader(getClass().getResource("presentation/view/Login.fxml"));
 
         Parent root = loader.load();
