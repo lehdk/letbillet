@@ -2,6 +2,7 @@ package dk.letbillet.presentation.controller;
 
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
+import dk.letbillet.presentation.model.RoleModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -25,6 +26,12 @@ public class LoginController implements Initializable {
 
     @FXML
     public PasswordField passwordField;
+
+    private RoleModel roleModel;
+
+    public LoginController() {
+        roleModel = new RoleModel();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

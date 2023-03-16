@@ -33,7 +33,6 @@ public class Main extends Application {
             System.exit(-1);
         }
 
-
         var loader = new FXMLLoader(getClass().getResource("presentation/view/Login.fxml"));
 
         Parent root = loader.load();
