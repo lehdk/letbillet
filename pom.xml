@@ -14,15 +14,20 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-     <dependencies>
-         <!-- https://mvnrepository.com/artifact/de.jensd/fontawesomefx -->
-         <dependency>
-             <groupId>de.jensd</groupId>
-             <artifactId>fontawesomefx</artifactId>
-             <version>8.2</version>
-         </dependency>
-
-     </dependencies>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/de.jensd/fontawesomefx -->
+        <dependency>
+            <groupId>de.jensd</groupId>
+            <artifactId>fontawesomefx</artifactId>
+            <version>8.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>12.2.0.jre11</version>
+        </dependency>
+    </dependencies>
 
 
 </project>

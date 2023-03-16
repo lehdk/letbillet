@@ -36,4 +36,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Custom ###
 /.idea/workspace.xml
+/src/main/resources/dk/letbillet/config.properties
