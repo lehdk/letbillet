@@ -2,23 +2,35 @@ package dk.letbillet.presentation.controller;
 
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
+import dk.letbillet.Main;
 import dk.letbillet.entity.User;
 import dk.letbillet.presentation.model.RoleModel;
 import dk.letbillet.presentation.model.UserModel;
 import dk.letbillet.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+
+    @FXML
+    public Pane pane;
 
     @FXML
     public Button exitButton;
@@ -55,6 +67,8 @@ public class LoginController implements Initializable {
 
         usernameField.textProperty().addListener(((observable, oldValue, newValue) -> setLoginButtonEnableState()));
         passwordField.textProperty().addListener(((observable, oldValue, newValue) -> setLoginButtonEnableState()));
+
+        setLoginButtonEnableState();
     }
 
     private void setLoginButtonEnableState() {
@@ -79,6 +93,18 @@ public class LoginController implements Initializable {
         badUsernameOrPasswordLabel.setVisible(!success);
         if(!success) return;
 
-        // TODO: Should redirect to application window here
+        try {
+            var loader = new FXMLLoader(Main.class.getResource("presentation/view/Application.fxml"));
+            Parent root1 = loader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setTitle("Letbillet");
+            stage.setScene(new Scene(root1));
+            pane.getScene().getWindow().hide();
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
