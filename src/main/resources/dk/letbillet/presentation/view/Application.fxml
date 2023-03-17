@@ -4,21 +4,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<HBox fx:id="appPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Application.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.letbillet.presentation.controller.ApplicationController">
-   <children>
-      <VBox fx:id="menuBox" prefHeight="720.0" prefWidth="204.0">
-         <children>
-            <Button fx:id="eventButton" mnemonicParsing="false" onAction="#handleShowEvents" prefWidth="10000.0" text="Events" />
-            <Button fx:id="userButton" mnemonicParsing="false" onAction="#handleShowUsers" prefWidth="10000.0" text="Users" />
-            <Button fx:id="aboutButton" mnemonicParsing="false" onAction="#handleShowAbout" prefWidth="10000.0" text="About" />
-            <Region VBox.vgrow="ALWAYS" />
-            <Label fx:id="loggedInAsLabel" text="Logged in as ">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-      <Pane fx:id="contentPane" prefHeight="720.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-   </children>
-</HBox>
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.letbillet.presentation.controller.ApplicationController">
+   <HBox fx:id="appPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@Application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+      <children>
+         <VBox fx:id="menuBox" prefWidth="200.0">
+            <children>
+               <Button fx:id="eventButton" mnemonicParsing="false" onAction="#handleShowEvents" prefWidth="10000.0" text="Events" />
+               <Button fx:id="userButton" mnemonicParsing="false" onAction="#handleShowUsers" prefWidth="10000.0" text="Users" />
+               <Button fx:id="aboutButton" mnemonicParsing="false" onAction="#handleShowAbout" prefWidth="10000.0" text="About" />
+               <Region VBox.vgrow="ALWAYS" />
+               <Label fx:id="loggedInAsLabel" text="Logged in as ">
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+               </Label>
+            </children>
+         </VBox>
+         <AnchorPane fx:id="contentPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" />
+      </children>
+   </HBox>
+</AnchorPane>

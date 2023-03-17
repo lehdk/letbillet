@@ -28,3 +28,7 @@ Button:disabled {
 #loggedInAsLabel {
     -fx-text-fill: #9EB3FF;
 }
+
+.contentPane {
+    -fx-width: 100%;
+}

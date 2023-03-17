@@ -2,15 +2,13 @@ package dk.letbillet.presentation.controller;
 
 import dk.letbillet.Main;
 import dk.letbillet.services.UserService;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,7 +16,7 @@ import java.util.ResourceBundle;
 
 public class ApplicationController implements Initializable {
     @FXML
-    public Pane contentPane;
+    public AnchorPane contentPane;
 
     @FXML
     public Label loggedInAsLabel;
@@ -47,6 +45,10 @@ public class ApplicationController implements Initializable {
     private void loadContent(String filename) {
         try {
             Node content = FXMLLoader.load(Main.class.getResource("presentation/view/"+filename+".fxml"));
+            //AnchorPane.setLeftAnchor(content, 0D);
+            AnchorPane.setRightAnchor(content, 0D);
+            AnchorPane.setTopAnchor(content, 0D);
+            AnchorPane.setBottomAnchor(content, 0D);
             contentPane.getChildren().setAll(content);
 
         } catch (IOException e) {
