@@ -87,4 +87,9 @@ public class Event {
     public void setTicketsSold(int ticketsSold) {
         this.ticketsSold = ticketsSold;
     }
+
+    @Override
+    public String toString() {
+        return "Event: " + name + ", Location: " + location + ", Starting: " + start;
+    }
 }

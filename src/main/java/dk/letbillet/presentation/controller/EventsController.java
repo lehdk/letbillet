@@ -32,11 +32,19 @@ public class EventsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        tableView.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 2) {
+                Event e = tableView.getSelectionModel().getSelectedItem();
+                System.out.println("Open: " + e);
+            }
+        });
+
         var events = eventModel.getEventObservableList();
         eventColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
         startColumn.setCellValueFactory(new PropertyValueFactory<>("Start"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("Location"));
         ticketsSoldColumn.setCellValueFactory(new PropertyValueFactory<>("TicketsSold"));
         tableView.setItems(events);
+
     }
 }

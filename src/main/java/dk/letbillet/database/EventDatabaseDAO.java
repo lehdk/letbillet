@@ -15,7 +15,16 @@ public class EventDatabaseDAO {
         List<Event> events = new ArrayList<>();
 
         try(Connection connection = DatabaseConnectionHandler.getInstance().getConnection()) {
-            String sql = "SELECT * FROM [Event];";
+            String sql = "SELECT" +
+                    "[Id]," +
+                    "[Name]," +
+                    "[Location]," +
+                    "[Notes]," +
+                    "[StartTime]," +
+                    "[EndTime]," +
+                    "[Price]," +
+                    "(SELECT COUNT(*) FROM [Ticket] WHERE [EventId] = [Event].[Id]) AS 'TicketsSold'" +
+                    "FROM [Event];";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             var resultSet = statement.executeQuery();
@@ -29,7 +38,7 @@ public class EventDatabaseDAO {
                     resultSet.getTimestamp("StartTime"),
                     resultSet.getTimestamp("EndTime"),
                     resultSet.getInt("Price"),
-                    0
+                    resultSet.getInt("TicketsSold")
                 ));
             }
         } catch (SQLException e) {
