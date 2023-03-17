@@ -30,3 +30,7 @@ Button:disabled {
     -fx-background-color: TRANSPARENT;
     -fx-text-fill: RED;
 }
+
+#badUsernameOrPasswordLabel {
+    -fx-text-fill: RED;
+}

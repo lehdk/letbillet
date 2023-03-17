@@ -2,9 +2,15 @@ package dk.letbillet.presentation.controller;
 
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
+import dk.letbillet.entity.User;
+import dk.letbillet.presentation.model.RoleModel;
+import dk.letbillet.presentation.model.UserModel;
+import dk.letbillet.services.UserService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -25,6 +31,17 @@ public class LoginController implements Initializable {
 
     @FXML
     public PasswordField passwordField;
+
+    @FXML
+    public Label badUsernameOrPasswordLabel;
+
+    private final RoleModel roleModel;
+    private final UserModel userModel;
+
+    public LoginController() {
+        roleModel = new RoleModel();
+        userModel = new UserModel();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,4 +68,17 @@ public class LoginController implements Initializable {
         System.exit(0);
     }
 
+    public void handleLogin() {
+        String username = usernameField.textProperty().getValue();
+        String password = passwordField.textProperty().getValue();
+
+        if(username.isEmpty() || password.isEmpty()) return;
+
+        // Handle login here
+        boolean success = userModel.logIn(username, password);
+        badUsernameOrPasswordLabel.setVisible(!success);
+        if(!success) return;
+
+        // TODO: Should redirect to application window here
+    }
 }
