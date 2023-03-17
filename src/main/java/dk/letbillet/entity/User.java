@@ -2,12 +2,22 @@ package dk.letbillet.entity;
 
 public class User {
 
+    private int id;
     private String username;
     private Role role;
+    private String password;
 
-    public User(String username, Role role) {
+    public User(int id, String username, int roleId) {
+        this.id = id;
         this.username = username;
         this.role = role;
+    }
+
+    public User(int id, String username, int roleId, String password) {
+        this.id = id;
+        this.username = username;
+        this.role = role;
+        this.password = password;
     }
 
     public String getUsername() {
@@ -21,5 +31,9 @@ public class User {
     @Override
     public String toString() {
         return getUsername();
+    }
+
+    public boolean doesPasswordsMatch(String testPassword) {
+        return this.password.equals(testPassword);
     }
 }

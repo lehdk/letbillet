@@ -2,7 +2,11 @@ package dk.letbillet.presentation.controller;
 
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
+import dk.letbillet.entity.User;
 import dk.letbillet.presentation.model.RoleModel;
+import dk.letbillet.presentation.model.UserModel;
+import dk.letbillet.services.UserService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -27,10 +31,12 @@ public class LoginController implements Initializable {
     @FXML
     public PasswordField passwordField;
 
-    private RoleModel roleModel;
+    private final RoleModel roleModel;
+    private final UserModel userModel;
 
     public LoginController() {
         roleModel = new RoleModel();
+        userModel = new UserModel();
     }
 
     @Override
@@ -58,4 +64,15 @@ public class LoginController implements Initializable {
         System.exit(0);
     }
 
+    public void handleLogin() {
+        String username = usernameField.textProperty().getValue();
+        String password = passwordField.textProperty().getValue();
+
+        if(username.isEmpty() || password.isEmpty()) return;
+
+        // Handle login here
+        boolean success = userModel.logIn(username, password);
+        User loggedInUser = UserService.getInstance().getLoggedInUser();
+        System.out.println("Login: " + success);
+    }
 }
