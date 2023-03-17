@@ -33,7 +33,7 @@ public class Main extends Application {
             System.exit(-1);
         }
 
-        var loader = new FXMLLoader(getClass().getResource("presentation/view/Login.fxml"));
+        var loader = new FXMLLoader(getClass().getResource("presentation/view/Application.fxml"));
 
         Parent root = loader.load();
         root.setOnMousePressed(event -> {

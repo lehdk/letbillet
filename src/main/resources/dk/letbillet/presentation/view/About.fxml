@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: RED;" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="About" wrappingWidth="589.13671875" VBox.vgrow="ALWAYS">
+            <font>
+                <Font size="86.0" />
+            </font>
+        </Text>
+    </children>
+</VBox>
