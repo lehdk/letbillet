@@ -13,22 +13,29 @@ public class UserDatabaseDAO {
 
     public User getUser(String username) {
         try(Connection connection = DatabaseConnectionHandler.getInstance().getConnection()) {
-            String sql = "SELECT * FROM [User] WHERE [Username] = ?;";
+            String sql = "SELECT [User].[Id], [User].[Username], [User].[PasswordHash], [Role].[Id] as 'RoleId', [Role].[Name] as 'RoleName' FROM [User]\n" +
+                    "JOIN [Role] on [User].[Role] = [Role].[Id]\n" +
+                    "WHERE [Username]=?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, username);
 
             var resultSet = statement.executeQuery();
 
-            var resultList = new ArrayList<Role>();
-
             if(resultSet.next()) {
-                return new User(
+                Role role = new Role(
+                    resultSet.getInt("RoleId"),
+                    resultSet.getString("RoleName")
+                );
+
+                User user = new User(
                     resultSet.getInt("Id"),
                     resultSet.getString("Username"),
-                    resultSet.getInt("Role"),
+                    role,
                     resultSet.getString("PasswordHash")
                 );
+
+                return user;
             }
 
             return null;
@@ -36,5 +43,4 @@ public class UserDatabaseDAO {
             throw new RuntimeException(e);
         }
     }
-
 }

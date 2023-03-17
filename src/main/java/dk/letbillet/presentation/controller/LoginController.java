@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -30,6 +31,9 @@ public class LoginController implements Initializable {
 
     @FXML
     public PasswordField passwordField;
+
+    @FXML
+    public Label badUsernameOrPasswordLabel;
 
     private final RoleModel roleModel;
     private final UserModel userModel;
@@ -72,7 +76,9 @@ public class LoginController implements Initializable {
 
         // Handle login here
         boolean success = userModel.logIn(username, password);
-        User loggedInUser = UserService.getInstance().getLoggedInUser();
-        System.out.println("Login: " + success);
+        badUsernameOrPasswordLabel.setVisible(!success);
+        if(!success) return;
+
+        // TODO: Should redirect to application window here
     }
 }

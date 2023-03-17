@@ -7,13 +7,13 @@ public class User {
     private Role role;
     private String password;
 
-    public User(int id, String username, int roleId) {
+    public User(int id, String username, Role role) {
         this.id = id;
         this.username = username;
         this.role = role;
     }
 
-    public User(int id, String username, int roleId, String password) {
+    public User(int id, String username, Role role, String password) {
         this.id = id;
         this.username = username;
         this.role = role;

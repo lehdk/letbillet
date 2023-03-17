@@ -33,5 +33,10 @@
          <font>
             <Font size="17.0" />
          </font></Button>
+      <Label fx:id="badUsernameOrPasswordLabel" layoutX="81.0" layoutY="309.0" text="Bad username or password!" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
