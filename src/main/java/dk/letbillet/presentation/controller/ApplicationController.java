@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -22,10 +23,23 @@ public class ApplicationController implements Initializable {
     @FXML
     public Label loggedInAsLabel;
 
+    @FXML
+    public Button eventButton;
+    @FXML
+    public Button userButton;
+    @FXML
+    public Button aboutButton;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         loggedInAsLabel.setText("Logged in as: " + UserService.getInstance().getLoggedInUser().getUsername());
+
+        int userRole = UserService.getInstance().getLoggedInUser().getRole().getId();
+        if(userRole == 2) {
+           userButton.setDisable(true);
+        }
 
         handleShowEvents();
     }

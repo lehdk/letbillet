@@ -16,6 +16,10 @@ Button:hover {
     -fx-cursor: hand;
 }
 
+Button:disabled {
+    -fx-background-color: #808080;
+}
+
 #menuBox {
     -fx-spacing: 20;
     -fx-padding: 10px;
