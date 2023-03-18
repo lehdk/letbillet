@@ -1,12 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<TableView fx:id="tableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" stylesheets="@Events.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.letbillet.presentation.controller.EventsController">
-  <columns>
-    <TableColumn fx:id="eventColumn" prefWidth="250.0" styleClass="tableColumn" text="Event" />
-    <TableColumn fx:id="startColumn" prefWidth="250.0" styleClass="tableColumn" text="Start" />
-    <TableColumn fx:id="locationColumn" prefWidth="250.0" styleClass="tableColumn" text="Location" />
-    <TableColumn fx:id="ticketsSoldColumn" prefWidth="100.0" styleClass="tableColumn" text="Tickets Sold" />
-  </columns>
-</TableView>
+<VBox stylesheets="@Events.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.letbillet.presentation.controller.EventsController">
+   <HBox prefWidth="200.0">
+      <children>
+         <Region HBox.hgrow="ALWAYS">
+            <HBox.margin>
+               <Insets bottom="5.0" />
+            </HBox.margin></Region>
+         <TextField fx:id="searchField" prefWidth="200.0" promptText="Search..." />
+      </children>
+      <VBox.margin>
+         <Insets bottom="5.0" top="5.0" />
+      </VBox.margin>
+   </HBox>
+  <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" stylesheets="@Events.css">
+    <columns>
+      <TableColumn fx:id="eventColumn" prefWidth="250.0" styleClass="tableColumn" text="Event" />
+      <TableColumn fx:id="startColumn" prefWidth="250.0" styleClass="tableColumn" text="Start" />
+      <TableColumn fx:id="locationColumn" prefWidth="250.0" styleClass="tableColumn" text="Location" />
+      <TableColumn fx:id="ticketsSoldColumn" prefWidth="100.0" styleClass="tableColumn" text="Tickets Sold" />
+    </columns>
+      <VBox.margin>
+         <Insets />
+      </VBox.margin>
+  </TableView>
+  <HBox prefWidth="200.0">
+    <children>
+      <Region HBox.hgrow="ALWAYS">
+            <HBox.margin>
+               <Insets bottom="5.0" top="5.0" />
+            </HBox.margin></Region>
+      <Button fx:id="newEventButton" mnemonicParsing="false" text="New event" />
+    </children>
+      <VBox.margin>
+         <Insets bottom="5.0" top="5.0" />
+      </VBox.margin>
+  </HBox>
+</VBox>

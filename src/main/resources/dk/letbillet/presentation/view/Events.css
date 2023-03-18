@@ -1,0 +1,8 @@
+.noDecoration {
+    -fx-background-color: TRANSPARENT;
+}
+
+#searchField {
+    -fx-background-color: #00337C;
+    -fx-text-fill: white;
+}

@@ -24,7 +24,8 @@ public class EventDatabaseDAO {
                     "[EndTime]," +
                     "[Price]," +
                     "(SELECT COUNT(*) FROM [Ticket] WHERE [EventId] = [Event].[Id]) AS 'TicketsSold'" +
-                    "FROM [Event];";
+                    "FROM [Event]" +
+                    "ORDER BY [StartTime];";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             var resultSet = statement.executeQuery();
