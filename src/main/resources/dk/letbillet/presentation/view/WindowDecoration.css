@@ -1,0 +1,14 @@
+#windowDecoration {
+    -fx-background-color: #13003A;
+}
+
+#windowDecoration Button:hover {
+    -fx-scale-x: 1.10;
+    -fx-scale-y: 1.10;
+    -fx-scale-z: 1.10;
+    -fx-cursor: hand;
+}
+
+.noDecoration {
+    -fx-background-color: TRANSPARENT;
+}
