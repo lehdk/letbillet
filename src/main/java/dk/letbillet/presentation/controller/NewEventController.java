@@ -42,7 +42,10 @@ public class NewEventController implements Initializable {
         startDatePicker.valueProperty().addListener(((observable, oldValue, newValue) -> checkCreateDisable()));
         endDatePicker.valueProperty().addListener(((observable, oldValue, newValue) -> checkCreateDisable()));
         locationTextField.textProperty().addListener(((observable, oldValue, newValue) -> checkCreateDisable()));
-        priceTextField.textProperty().addListener(((observable, oldValue, newValue) -> checkCreateDisable()));
+        priceTextField.textProperty().addListener(((observable, oldValue, newValue) -> {
+            if(!newValue.matches("\\d*")) priceTextField.textProperty().setValue(oldValue); // Only allows numbers
+            else checkCreateDisable(); // Only check if needed
+        }));
     }
 
     public void handleCancelButton() {
