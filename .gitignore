@@ -40,3 +40,4 @@ build/
 ### Custom ###
 /.idea/workspace.xml
 /src/main/resources/dk/letbillet/config.properties
+/.idea/uiDesigner.xml
