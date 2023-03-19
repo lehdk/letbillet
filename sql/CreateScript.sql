@@ -49,14 +49,14 @@ INSERT INTO [Role] ([Name]) VALUES ('Admin'), ('Event Coordinator');
 
 INSERT INTO [User] ([Username], [PasswordHash], [Role]) VALUES 
     ('admin', 'password', 1),
-    ('Event Coordinator', 'pass', 2);
+    ('ec', 'password', 2);
 
 INSERT INTO [Customer] ([Name], [Email]) VALUES 
     ('ANONYMOUS', 'ANONYMOUS'),
     ('Test User 2', 'test2@user.com');
 
-INSERT INTO [Event] ([Name], [Location], [StartTime], [Price]) VALUES ('Fredagsbar Koncert', 'EASV', CONVERT(datetime, '2023-04-24 13:30:00'), 50);
-INSERT INTO [Event] ([Name], [Location], [StartTime], [EndTime], [Notes]) VALUES ('AU Hack', 'AU', CONVERT(datetime, '2023-04-24 17:00:00'), CONVERT(datetime, '2023-04-26 15:30:00'), 'Mega sejt event!');
+INSERT INTO [Event] ([Name], [Location], [StartTime], [EndTime], [Notes]) VALUES ('AU Hack', 'AU', CONVERT(datetime, '2023-03-24 17:00:00'), CONVERT(datetime, '2023-04-26 15:30:00'), 'Mega sejt event!');
+INSERT INTO [Event] ([Name], [Location], [StartTime], [Price]) VALUES ('Fredagsbar Koncert', 'EASV', CONVERT(datetime, '2023-03-17 13:30:00'), 50);
 
 INSERT INTO [Ticket] ([EventId], [CustomerId]) VALUES
     (1, 1),

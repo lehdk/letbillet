@@ -22,6 +22,7 @@
       <TableColumn fx:id="eventColumn" prefWidth="250.0" styleClass="tableColumn" text="Event" />
       <TableColumn fx:id="startColumn" prefWidth="250.0" styleClass="tableColumn" text="Start" />
       <TableColumn fx:id="locationColumn" prefWidth="250.0" styleClass="tableColumn" text="Location" />
+      <TableColumn fx:id="priceColumn" prefWidth="100.0" styleClass="tableColumn" text="Price" />
       <TableColumn fx:id="ticketsSoldColumn" prefWidth="100.0" styleClass="tableColumn" text="Tickets Sold" />
     </columns>
       <VBox.margin>
@@ -34,7 +35,7 @@
             <HBox.margin>
                <Insets bottom="5.0" top="5.0" />
             </HBox.margin></Region>
-      <Button fx:id="newEventButton" mnemonicParsing="false" text="New event" />
+      <Button fx:id="newEventButton" onAction="#handleNewEvent" mnemonicParsing="false" text="New event" />
     </children>
       <VBox.margin>
          <Insets bottom="5.0" top="5.0" />

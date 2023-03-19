@@ -1,0 +1,15 @@
+#pane {
+    -fx-background-color: #13005A;
+    -fx-text-fill: WHITE;
+
+    -fx-border-color: BLACK;
+    -fx-border-width: 1px;
+}
+
+#headline {
+    -fx-text-fill: WHITE;
+}
+
+.gridLabel {
+    -fx-text-fill: WHITE;
+}
