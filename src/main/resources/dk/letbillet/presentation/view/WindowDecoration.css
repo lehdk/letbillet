@@ -12,3 +12,7 @@
 .noDecoration {
     -fx-background-color: TRANSPARENT;
 }
+
+#windowTitle {
+    -fx-text-fill: WHITE;
+}

@@ -5,15 +5,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox stylesheets="@WindowDecoration.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.letbillet.presentation.controller.ApplicationController">
+<VBox style="-fx-border-color: BLACK; -fx-border-width: 1px;" stylesheets="@WindowDecoration.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.letbillet.presentation.controller.ApplicationController">
    <HBox fx:id="windowDecoration" spacing="10.0">
       <children>
+         <Label fx:id="windowTitle" text="Letbillet">
+            <font>
+               <Font size="15.0" />
+            </font></Label>
          <Region HBox.hgrow="ALWAYS" />
          <Button fx:id="minimizeButton" mnemonicParsing="false" onAction="#minimizeApplication" text="Minimize" />
          <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitApplication" text="Close" />
       </children>
       <padding>
-         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
       </padding>
       <VBox.margin>
          <Insets />
