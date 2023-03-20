@@ -34,8 +34,32 @@
             <Label styleClass="gridLabel" text="Price" GridPane.rowIndex="4" />
             <Label styleClass="gridLabel" text="Notes*" GridPane.rowIndex="5" />
             <TextField fx:id="nameTextField" promptText="Event name" GridPane.columnIndex="1" />
-            <DatePicker fx:id="startDatePicker" promptText="Start time" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <DatePicker fx:id="endDatePicker" promptText="End time" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <HBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <DatePicker fx:id="startDatePicker" promptText="Start date" />
+               <ChoiceBox fx:id="startHChoiceBox" />
+               <Label text=":" textFill="WHITE">
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+                  <HBox.margin>
+                     <Insets left="-3.0" right="-3.0" />
+                  </HBox.margin>
+               </Label>
+               <ChoiceBox fx:id="startMChoiceBox" />
+            </HBox>
+            <HBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <DatePicker fx:id="endDatePicker" promptText="End date" />
+                <ChoiceBox fx:id="endHChoiceBox" />
+                <Label text=":" textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                  <HBox.margin>
+                     <Insets left="-3.0" right="-3.0" />
+                  </HBox.margin>
+                </Label>
+                <ChoiceBox fx:id="endMChoiceBox" />
+            </HBox>
             <TextField fx:id="locationTextField" promptText="Event location" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="priceTextField" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextArea fx:id="notesTextField" prefHeight="200.0" prefWidth="200.0" promptText="Notes" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />

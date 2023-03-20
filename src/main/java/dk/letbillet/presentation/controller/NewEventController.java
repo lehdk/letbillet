@@ -1,14 +1,9 @@
 package dk.letbillet.presentation.controller;
 
-import dk.letbillet.entity.Event;
 import dk.letbillet.entity.EventDTO;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -30,6 +25,14 @@ public class NewEventController implements Initializable {
     @FXML
     public DatePicker endDatePicker;
     @FXML
+    public ChoiceBox<Integer> startHChoiceBox;
+    @FXML
+    public ChoiceBox<Integer> startMChoiceBox;
+    @FXML
+    public ChoiceBox<Integer> endHChoiceBox;
+    @FXML
+    public ChoiceBox<Integer> endMChoiceBox;
+    @FXML
     private EventDTO result;
     @FXML
     public Button createButton;
@@ -39,13 +42,38 @@ public class NewEventController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         nameTextField.textProperty().addListener(((observable, oldValue, newValue) -> checkCreateDisable()));
+
         startDatePicker.valueProperty().addListener(((observable, oldValue, newValue) -> checkCreateDisable()));
+        startHChoiceBox.valueProperty().addListener(((observable, oldValue, newValue) -> checkCreateDisable()));
+        startMChoiceBox.valueProperty().addListener(((observable, oldValue, newValue) -> checkCreateDisable()));
+
         endDatePicker.valueProperty().addListener(((observable, oldValue, newValue) -> checkCreateDisable()));
+        endHChoiceBox.valueProperty().addListener(((observable, oldValue, newValue) -> checkCreateDisable()));
+        endMChoiceBox.valueProperty().addListener(((observable, oldValue, newValue) -> checkCreateDisable()));
+
         locationTextField.textProperty().addListener(((observable, oldValue, newValue) -> checkCreateDisable()));
         priceTextField.textProperty().addListener(((observable, oldValue, newValue) -> {
             if(!newValue.matches("\\d*")) priceTextField.textProperty().setValue(oldValue); // Only allows numbers
             else checkCreateDisable(); // Only check if needed
         }));
+
+        // Hour selectors
+        endHChoiceBox.getItems().add(null);
+        for (int hour = 0; hour < 24; hour++) {
+            startHChoiceBox.getItems().add(hour);
+            endHChoiceBox.getItems().add(hour);
+        }
+        startHChoiceBox.setValue(12);
+        endHChoiceBox.setValue(null);
+
+        // Minute selectors
+        endMChoiceBox.getItems().add(null);
+        for (int minute = 0; minute < 60; minute += 15) {
+            startMChoiceBox.getItems().add(minute);
+            endMChoiceBox.getItems().add(minute);
+        }
+        startMChoiceBox.setValue(0);
+        endMChoiceBox.setValue(null);
     }
 
     public void handleCancelButton() {
@@ -65,13 +93,18 @@ public class NewEventController implements Initializable {
             e.printStackTrace();
         }
 
-        // TODO: Make datetime picker!
+        Timestamp startTime = generateStartTimestamp();
+        Timestamp endTime = null;
+        if(endDatePicker.valueProperty().getValue() != null) {
+            endTime = generateEndTimestamp();
+        }
+
         result = new EventDTO(
                 nameTextField.textProperty().getValue(),
                 locationTextField.textProperty().getValue(),
                 notes,
-                new Timestamp(2023, 3, 19, 0, 0, 0, 0),
-                null,
+                startTime,
+                endTime,
                 price
         );
 
@@ -81,16 +114,31 @@ public class NewEventController implements Initializable {
 
     private void checkCreateDisable() {
         boolean nameOk = nameTextField.textProperty().getValue().length() > 0;
-        boolean startOk = startDatePicker.valueProperty().get() != null;
-        // TODO:  check if end is after start
+        boolean startOk = startDatePicker.valueProperty().getValue() != null && startHChoiceBox.getValue() != null && startMChoiceBox.getValue() != null;
+        boolean endOk = (endDatePicker.valueProperty().getValue() == null) || (endHChoiceBox.getValue() != null && endMChoiceBox.getValue() != null);
+
+        Timestamp startTimestamp = generateStartTimestamp();
+        Timestamp endTimestamp = generateEndTimestamp();
+        boolean isStartBeforeEnd = false;
+        if(startOk) isStartBeforeEnd = (endTimestamp == null) || (startTimestamp.before(endTimestamp));
+
         boolean locationOk = locationTextField.textProperty().getValue().length() > 0;
         boolean priceOk = priceTextField.textProperty().getValue().length() > 0;
 
-        createButton.setDisable(!(nameOk && startOk && locationOk && priceOk));
+        createButton.setDisable(!(nameOk && startOk && endOk && isStartBeforeEnd && locationOk && priceOk));
     }
 
     public EventDTO getResult() {
         return result;
     }
 
+    private Timestamp generateStartTimestamp() {
+        if(startDatePicker.getValue() == null || startHChoiceBox.getValue() == null || startMChoiceBox.getValue() == null) return null;
+        return new Timestamp(startDatePicker.getValue().getYear() - 1900, startDatePicker.getValue().getMonthValue(), startDatePicker.getValue().getDayOfMonth(), startHChoiceBox.getValue(), startMChoiceBox.getValue(), 0, 0);
+    }
+
+    private Timestamp generateEndTimestamp() {
+        if(endDatePicker.getValue() == null || endHChoiceBox.getValue() == null || endMChoiceBox.getValue() == null) return null;
+        return new Timestamp(endDatePicker.getValue().getYear() - 1900, endDatePicker.getValue().getMonthValue(), endDatePicker.getValue().getDayOfMonth(), endHChoiceBox.getValue(), endMChoiceBox.getValue(), 0, 0);
+    }
 }
