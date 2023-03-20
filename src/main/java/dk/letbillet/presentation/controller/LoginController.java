@@ -3,11 +3,9 @@ package dk.letbillet.presentation.controller;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import dk.letbillet.Main;
-import dk.letbillet.entity.User;
 import dk.letbillet.presentation.model.RoleModel;
 import dk.letbillet.presentation.model.UserModel;
-import dk.letbillet.services.UserService;
-import javafx.event.ActionEvent;
+import dk.letbillet.util.LogoLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -114,7 +112,7 @@ public class LoginController implements Initializable {
                 stage.setX(event.getScreenX() - xOffset);
                 stage.setY(event.getScreenY() - yOffset);
             });
-
+            LogoLoader.addLogoToStage(stage);
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);

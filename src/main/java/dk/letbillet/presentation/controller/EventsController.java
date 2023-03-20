@@ -7,10 +7,10 @@ import dk.letbillet.entity.Event;
 import dk.letbillet.entity.EventDTO;
 import dk.letbillet.presentation.model.EventModel;
 import dk.letbillet.services.UserService;
+import dk.letbillet.util.LogoLoader;
 import javafx.animation.PauseTransition;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Filter;
 
 public class EventsController implements Initializable {
 
@@ -118,6 +117,8 @@ public class EventsController implements Initializable {
         popupStage.setScene(popupScene);
         popupStage.initModality(Modality.APPLICATION_MODAL);
         popupStage.initStyle(StageStyle.UNDECORATED);
+
+        LogoLoader.addLogoToStage(popupStage);
 
         popupStage.showAndWait();
 
