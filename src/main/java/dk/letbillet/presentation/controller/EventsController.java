@@ -69,6 +69,7 @@ public class EventsController implements Initializable {
                     FXMLLoader loader = new FXMLLoader(Main.class.getResource("presentation/view/ViewEvent.fxml"));
                     Parent root = loader.load();
                     ViewEventController controller = loader.getController();
+                    controller.setEventModel(eventModel);
                     controller.setCurrentEvent(e);
 
                     Scene popupScene = new Scene(root);
