@@ -1,6 +1,7 @@
 package dk.letbillet;
 
 import dk.letbillet.database.DatabaseConnectionHandler;
+import dk.letbillet.util.LogoLoader;
 import dk.letbillet.util.PropertyLoader;
 import dk.letbillet.util.PropertyResult;
 import javafx.application.Application;
@@ -47,6 +48,7 @@ public class Main extends Application {
         var scene = new Scene(root);
 
         stage.setScene(scene);
+        LogoLoader.addLogoToStage(stage);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(false);
         stage.show();

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="pane" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="350.0" stylesheets="@NewEvent.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.letbillet.presentation.controller.NewEventController">
+   <children>
+      <Label fx:id="headline" text="Create Event" textAlignment="CENTER">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <GridPane hgap="5.0" vgap="5.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="RIGHT" hgrow="NEVER" minWidth="10.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="150.0" />
+            <RowConstraints />
+        </rowConstraints>
+         <children>
+            <Label styleClass="gridLabel" text="Name" />
+            <Label styleClass="gridLabel" text="Start" GridPane.rowIndex="1" />
+            <Label styleClass="gridLabel" text="End*" GridPane.rowIndex="2" />
+            <Label styleClass="gridLabel" text="Location" GridPane.rowIndex="3" />
+            <Label styleClass="gridLabel" text="Price" GridPane.rowIndex="4" />
+            <Label styleClass="gridLabel" text="Notes*" GridPane.rowIndex="5" />
+            <TextField fx:id="nameTextField" promptText="Event name" GridPane.columnIndex="1" />
+            <HBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <DatePicker fx:id="startDatePicker" promptText="Start date" />
+               <ChoiceBox fx:id="startHChoiceBox" />
+               <Label text=":" textFill="WHITE">
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+                  <HBox.margin>
+                     <Insets left="-3.0" right="-3.0" />
+                  </HBox.margin>
+               </Label>
+               <ChoiceBox fx:id="startMChoiceBox" />
+            </HBox>
+            <HBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <DatePicker fx:id="endDatePicker" promptText="End date" />
+                <ChoiceBox fx:id="endHChoiceBox" />
+                <Label text=":" textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                  <HBox.margin>
+                     <Insets left="-3.0" right="-3.0" />
+                  </HBox.margin>
+                </Label>
+                <ChoiceBox fx:id="endMChoiceBox" />
+            </HBox>
+            <TextField fx:id="locationTextField" promptText="Event location" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="priceTextField" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextArea fx:id="notesTextField" prefHeight="200.0" prefWidth="200.0" promptText="Notes" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </GridPane>
+      <Label style="-fx-text-fill: GRAY;" text="* optional fields">
+         <padding>
+            <Insets bottom="8.0" top="-12.0" />
+         </padding>
+      </Label>
+      <HBox alignment="TOP_CENTER" spacing="30.0">
+         <children>
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" text="Cancel" />
+            <Button fx:id="createButton" disable="true" mnemonicParsing="false" onAction="#handleCreateButton" text="Create" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+   </padding>
+</VBox>

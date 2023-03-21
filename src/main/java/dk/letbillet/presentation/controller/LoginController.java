@@ -3,11 +3,9 @@ package dk.letbillet.presentation.controller;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import dk.letbillet.Main;
-import dk.letbillet.entity.User;
 import dk.letbillet.presentation.model.RoleModel;
 import dk.letbillet.presentation.model.UserModel;
-import dk.letbillet.services.UserService;
-import javafx.event.ActionEvent;
+import dk.letbillet.util.LogoLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,6 +26,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+
+    private double xOffset = 0; // Used for drag window
+    private double yOffset = 0; // Used for drag window
 
     @FXML
     public Pane pane;
@@ -98,10 +99,20 @@ public class LoginController implements Initializable {
             Parent root1 = loader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.DECORATED);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setTitle("Letbillet");
             stage.setScene(new Scene(root1));
             pane.getScene().getWindow().hide();
+
+            root1.setOnMousePressed(event -> {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            });
+            root1.setOnMouseDragged(event -> {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+            });
+            LogoLoader.addLogoToStage(stage);
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
