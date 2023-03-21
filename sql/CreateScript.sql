@@ -1,10 +1,10 @@
 USE Letbillet;
 
+DROP TABLE IF EXISTS [Ticket];
+DROP TABLE IF EXISTS [Event];
 DROP TABLE IF EXISTS [User];
 DROP TABLE IF EXISTS [Role];
-DROP TABLE IF EXISTS [Ticket];
 DROP TABLE IF EXISTS [Customer];
-DROP TABLE IF EXISTS [Event];
 
 CREATE TABLE [Role] (
     [Id] INT PRIMARY KEY IDENTITY(1, 1) NOT NULL,
@@ -32,6 +32,7 @@ CREATE TABLE [Event] (
     [StartTime] DATETIME NOT NULL,
     [EndTime] DATETIME,
     [Price] INT NOT NULL DEFAULT 0,
+    [CreatedBy] INT FOREIGN KEY REFERENCES [User](Id)
     -- location guidence
 );
 
@@ -49,14 +50,15 @@ INSERT INTO [Role] ([Name]) VALUES ('Admin'), ('Event Coordinator');
 
 INSERT INTO [User] ([Username], [PasswordHash], [Role]) VALUES 
     ('admin', 'password', 1),
-    ('ec', 'password', 2);
+    ('ec', 'password', 2),
+    ('ec3', 'password', 2);
 
 INSERT INTO [Customer] ([Name], [Email]) VALUES 
     ('ANONYMOUS', 'ANONYMOUS'),
     ('Test User 2', 'test2@user.com');
 
-INSERT INTO [Event] ([Name], [Location], [StartTime], [EndTime], [Notes]) VALUES ('AU Hack', 'AU', CONVERT(datetime, '2023-03-24 17:00:00'), CONVERT(datetime, '2023-04-26 15:30:00'), 'Mega sejt event!');
-INSERT INTO [Event] ([Name], [Location], [StartTime], [Price]) VALUES ('Fredagsbar Koncert', 'EASV', CONVERT(datetime, '2023-03-17 13:30:00'), 50);
+INSERT INTO [Event] ([Name], [Location], [StartTime], [EndTime], [Notes], [CreatedBy]) VALUES ('AU Hack', 'AU', CONVERT(datetime, '2023-03-24 17:00:00'), CONVERT(datetime, '2023-04-26 15:30:00'), 'Mega sejt event!', 2);
+INSERT INTO [Event] ([Name], [Location], [StartTime], [Price], [CreatedBy]) VALUES ('Fredagsbar Koncert', 'EASV', CONVERT(datetime, '2023-03-17 13:30:00'), 50, 2);
 
 INSERT INTO [Ticket] ([EventId], [CustomerId]) VALUES
     (1, 1),

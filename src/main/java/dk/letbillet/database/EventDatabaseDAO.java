@@ -2,8 +2,8 @@ package dk.letbillet.database;
 
 import dk.letbillet.entity.Event;
 import dk.letbillet.entity.EventDTO;
+import dk.letbillet.services.UserService;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,7 @@ public class EventDatabaseDAO {
 
     public Event createEvent(EventDTO event) throws SQLException {
         try(Connection connection = DatabaseConnectionHandler.getInstance().getConnection()) {
-            String sql = "INSERT INTO [Event] ([Name], [Location], [StartTime], [EndTime], [Notes], [Price]) VALUES (?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO [Event] ([Name], [Location], [StartTime], [EndTime], [Notes], [Price], [CreatedBy]) VALUES (?, ?, ?, ?, ?, ?, ?);";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, event.getName());
@@ -59,6 +59,7 @@ public class EventDatabaseDAO {
             statement.setTimestamp(4, event.getEnd());
             statement.setString(5, event.getNotes());
             statement.setInt(6, event.getPrice());
+            statement.setInt(7, UserService.getInstance().getLoggedInUser().getId());
 
             statement.executeUpdate();
 
