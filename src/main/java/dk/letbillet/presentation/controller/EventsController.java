@@ -60,8 +60,29 @@ public class EventsController implements Initializable {
         // Set data for tableview
         tableView.setOnMouseClicked(event -> {
             if(event.getClickCount() == 2) {
-                Event e = tableView.getSelectionModel().getSelectedItem();
-                System.out.println("Open: " + e);
+                try {
+                    Event e = tableView.getSelectionModel().getSelectedItem();
+                    if(e == null) return;
+
+                    Stage popupStage = new Stage();
+
+                    FXMLLoader loader = new FXMLLoader(Main.class.getResource("presentation/view/ViewEvent.fxml"));
+                    Parent root = loader.load();
+                    ViewEventController controller = loader.getController();
+                    controller.setCurrentEvent(e);
+
+                    Scene popupScene = new Scene(root);
+
+                    popupStage.setScene(popupScene);
+                    popupStage.initModality(Modality.APPLICATION_MODAL);
+                    popupStage.initStyle(StageStyle.UNDECORATED);
+
+                    LogoLoader.addLogoToStage(popupStage);
+
+                    popupStage.showAndWait();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
