@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -37,6 +38,8 @@ public class ApplicationController implements Initializable {
     public Button minimizeButton;
     @FXML
     public HBox windowDecoration;
+    @FXML
+    public Button settingsButton;
 
     public ApplicationController() {
     }
@@ -68,7 +71,26 @@ public class ApplicationController implements Initializable {
            userButton.setDisable(true);
         }
 
+        // Icons
+        try {
+            Text eventIcon = GlyphsDude.createIcon(FontAwesomeIcons.CALENDAR, "20pt");
+            Text usersIcon = GlyphsDude.createIcon(FontAwesomeIcons.USERS, "20pt");
+            Text settingsIcon = GlyphsDude.createIcon(FontAwesomeIcons.GEAR, "20pt");
+            Text aboutIcon = GlyphsDude.createIcon(FontAwesomeIcons.INFO, "20pt");
+
+            setButtonIcon(eventIcon, eventButton);
+            setButtonIcon(usersIcon, userButton);
+            setButtonIcon(settingsIcon, settingsButton);
+            setButtonIcon(aboutIcon, aboutButton);
+        } catch (Exception ignored) { }
+
         handleShowEvents();
+    }
+
+    private void setButtonIcon(Text icon, Button button) {
+        button.setContentDisplay(ContentDisplay.LEFT);
+        button.setGraphicTextGap(10);
+        button.setGraphic(icon);
     }
 
     private void loadContent(String filename) {
