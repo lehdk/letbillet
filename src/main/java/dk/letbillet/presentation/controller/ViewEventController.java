@@ -1,7 +1,9 @@
 package dk.letbillet.presentation.controller;
 
 import dk.letbillet.entity.Event;
+import dk.letbillet.presentation.model.EventModel;
 import dk.letbillet.services.UserService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -9,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ViewEventController implements Initializable {
@@ -33,8 +36,10 @@ public class ViewEventController implements Initializable {
     public Button deleteButton;
     @FXML
     public Button editButton;
-    @FXML
+
     private Event currentEvent;
+
+    private EventModel eventModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -42,6 +47,10 @@ public class ViewEventController implements Initializable {
             ticketButton.setDisable(true);
             editButton.setDisable(true);
         }
+    }
+
+    public void setEventModel(EventModel model) {
+        eventModel = model;
     }
 
     public void setCurrentEvent(Event event) {
@@ -58,5 +67,14 @@ public class ViewEventController implements Initializable {
     public void handleCloseButton() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void handleDeleteEvent() {
+        try {
+            eventModel.deleteEvent(currentEvent);
+            handleCloseButton();
+        } catch (SQLException e) {
+            System.out.println("Could not delete event!");
+        }
     }
 }

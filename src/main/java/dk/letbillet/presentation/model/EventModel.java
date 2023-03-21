@@ -31,4 +31,12 @@ public class EventModel {
             eventObservableList.add(newEvent);
         }
     }
+
+    public void deleteEvent(Event event) throws SQLException {
+        boolean wasDeleted = eventManager.deleteEvent(event);
+
+        if(wasDeleted) {
+            eventObservableList.remove(event);
+        }
+    }
 }

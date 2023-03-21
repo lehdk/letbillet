@@ -1,5 +1,6 @@
 package dk.letbillet.database;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dk.letbillet.entity.Event;
 import dk.letbillet.entity.EventDTO;
 import dk.letbillet.services.UserService;
@@ -71,5 +72,19 @@ public class EventDatabaseDAO {
         }
 
         return null;
+    }
+
+    public boolean deleteEvent(Event event) throws SQLException {
+
+        try(Connection connection = DatabaseConnectionHandler.getInstance().getConnection()) {
+            String sql = "DELETE FROM [Event] WHERE [Id] = ?";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, event.getId());
+
+            int result = statement.executeUpdate();
+
+            return (result != 0);
+        }
     }
 }

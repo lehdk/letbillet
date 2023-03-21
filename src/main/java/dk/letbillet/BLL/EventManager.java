@@ -22,4 +22,8 @@ public class EventManager {
     public Event createEvent(EventDTO event) throws SQLException {
         return eventDAO.createEvent(event);
     }
+
+    public boolean deleteEvent(Event event) throws SQLException {
+        return eventDAO.deleteEvent(event);
+    }
 }
