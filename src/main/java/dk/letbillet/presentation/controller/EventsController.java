@@ -5,6 +5,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import dk.letbillet.Main;
 import dk.letbillet.entity.Event;
 import dk.letbillet.entity.EventDTO;
+import dk.letbillet.entity.Role;
 import dk.letbillet.presentation.model.EventModel;
 import dk.letbillet.services.UserService;
 import dk.letbillet.util.EventLoader;
@@ -97,12 +98,10 @@ public class EventsController implements Initializable {
         }));
 
         // Set what you are able to do depending on what role you have
-        int userRole = UserService.getInstance().getLoggedInUser().getRole().getId();
-        if(userRole == 1) {
+        Role userRole = UserService.getInstance().getLoggedInUser().getRole();
+        if(userRole.getRoleName().equals("Admin")) {
             newEventButton.setDisable(true);
         }
-
-
     }
 
     public void handleNewEvent() throws IOException {
