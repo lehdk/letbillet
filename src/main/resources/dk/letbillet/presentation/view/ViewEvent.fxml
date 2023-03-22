@@ -7,7 +7,7 @@
 
 <VBox fx:id="window" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@ViewEvent.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.letbillet.presentation.controller.ViewEventController">
    <children>
-      <Label text="Event Name">
+      <Label fx:id="eventNameLabel" text="Event Name">
          <font>
             <Font size="30.0" />
          </font>

@@ -3,7 +3,6 @@ package dk.letbillet.presentation.controller;
 import dk.letbillet.entity.Event;
 import dk.letbillet.presentation.model.EventModel;
 import dk.letbillet.services.UserService;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,6 +15,8 @@ import java.util.ResourceBundle;
 
 public class ViewEventController implements Initializable {
 
+    @FXML
+    public Label eventNameLabel;
     @FXML
     public Label locationLabel;
     @FXML
@@ -56,6 +57,7 @@ public class ViewEventController implements Initializable {
     public void setCurrentEvent(Event event) {
         currentEvent = event;
 
+        eventNameLabel.textProperty().setValue(event.getName());
         locationLabel.textProperty().setValue(event.getLocation());
         startsAtLabel.textProperty().setValue(event.getStart().toString());
         endsAtLabel.textProperty().setValue((event.getEnd() == null) ? "" : event.getEnd().toString());

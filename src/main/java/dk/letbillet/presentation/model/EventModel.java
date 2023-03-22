@@ -24,12 +24,12 @@ public class EventModel {
         return eventObservableList;
     }
 
-    public void createEvent(EventDTO result) throws SQLException {
+    public Event createEvent(EventDTO result) throws SQLException {
         Event newEvent = eventManager.createEvent(result);
 
-        if(newEvent != null) {
-            eventObservableList.add(newEvent);
-        }
+        if(newEvent != null) eventObservableList.add(newEvent);
+
+        return newEvent;
     }
 
     public void deleteEvent(Event event) throws SQLException {

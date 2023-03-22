@@ -7,6 +7,7 @@ import dk.letbillet.entity.Event;
 import dk.letbillet.entity.EventDTO;
 import dk.letbillet.presentation.model.EventModel;
 import dk.letbillet.services.UserService;
+import dk.letbillet.util.EventLoader;
 import dk.letbillet.util.LogoLoader;
 import javafx.animation.PauseTransition;
 import javafx.collections.transformation.FilteredList;
@@ -58,32 +59,10 @@ public class EventsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         // Set data for tableview
-        tableView.setOnMouseClicked(event -> {
-            if(event.getClickCount() == 2) {
-                try {
-                    Event e = tableView.getSelectionModel().getSelectedItem();
-                    if(e == null) return;
-
-                    Stage popupStage = new Stage();
-
-                    FXMLLoader loader = new FXMLLoader(Main.class.getResource("presentation/view/ViewEvent.fxml"));
-                    Parent root = loader.load();
-                    ViewEventController controller = loader.getController();
-                    controller.setEventModel(eventModel);
-                    controller.setCurrentEvent(e);
-
-                    Scene popupScene = new Scene(root);
-
-                    popupStage.setScene(popupScene);
-                    popupStage.initModality(Modality.APPLICATION_MODAL);
-                    popupStage.initStyle(StageStyle.UNDECORATED);
-
-                    LogoLoader.addLogoToStage(popupStage);
-
-                    popupStage.showAndWait();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+        tableView.setOnMouseClicked(mouseEvent -> {
+            if(mouseEvent.getClickCount() == 2) {
+                Event event = tableView.getSelectionModel().getSelectedItem();
+                EventLoader.openEventWindow(event, eventModel);
             }
         });
 
@@ -98,9 +77,7 @@ public class EventsController implements Initializable {
         // Icon for new event button
         try {
             Text icon = GlyphsDude.createIcon(FontAwesomeIcons.FILE, "20pt");
-            icon.setStyle("-fx-font-family: FontAwesome; -fx-fill: #03C988;");
-
-            newEventButton.setContentDisplay(ContentDisplay.RIGHT);
+            newEventButton.setContentDisplay(ContentDisplay.LEFT);
             newEventButton.setGraphicTextGap(10);
             newEventButton.setGraphic(icon);
         } catch (Exception ignored) { }
@@ -148,10 +125,10 @@ public class EventsController implements Initializable {
         if(result == null) return; // The cancel button has been pressed
 
         try {
-            eventModel.createEvent(result);
+            Event event = eventModel.createEvent(result);
+            EventLoader.openEventWindow(event, eventModel);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 }
