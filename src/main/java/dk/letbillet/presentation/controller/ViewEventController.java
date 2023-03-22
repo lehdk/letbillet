@@ -60,10 +60,34 @@ public class ViewEventController implements Initializable {
         eventNameLabel.textProperty().setValue(event.getName());
         locationLabel.textProperty().setValue(event.getLocation());
         startsAtLabel.textProperty().setValue(event.getStart().toString());
-        endsAtLabel.textProperty().setValue((event.getEnd() == null) ? "" : event.getEnd().toString());
-        priceLabel.textProperty().setValue(event.getPrice() + "");
-        ticketsSoldLabel.textProperty().setValue(event.getTicketsSold() + "");
-        notesLabel.textProperty().setValue(event.getNotes());
+
+        if(event.getEnd() == null) {
+            endsAtLabel.textProperty().setValue("No end date set");
+            endsAtLabel.getStyleClass().add("grayed");
+        } else {
+            endsAtLabel.textProperty().setValue(event.getEnd().toString());
+        }
+
+        if(event.getPrice() == 0) {
+            priceLabel.textProperty().setValue("Free");
+            priceLabel.getStyleClass().add("grayed");
+        } else {
+            priceLabel.textProperty().setValue(event.getPrice() + "");
+        }
+
+        if(event.getTicketsSold() == 0) {
+            ticketsSoldLabel.textProperty().setValue("No tickets sold");
+            ticketsSoldLabel.getStyleClass().add("grayed");
+        } else {
+            ticketsSoldLabel.textProperty().setValue(event.getTicketsSold() + "");
+        }
+
+        if(event.getNotes() == null || event.getNotes().isEmpty()) {
+            notesLabel.textProperty().setValue("No notes");
+            notesLabel.getStyleClass().add("grayed");
+        } else {
+            notesLabel.textProperty().setValue(event.getNotes());
+        }
     }
 
     public void handleCloseButton() {

@@ -25,3 +25,7 @@ Label {
 .button:disabled {
     -fx-background-color: #808080;
 }
+
+.grayed {
+    -fx-text-fill: #9EB3FF;
+}

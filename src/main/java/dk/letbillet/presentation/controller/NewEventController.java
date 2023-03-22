@@ -53,8 +53,14 @@ public class NewEventController implements Initializable {
 
         locationTextField.textProperty().addListener(((observable, oldValue, newValue) -> checkCreateDisable()));
         priceTextField.textProperty().addListener(((observable, oldValue, newValue) -> {
-            if(!newValue.matches("\\d*")) priceTextField.textProperty().setValue(oldValue); // Only allows numbers
-            else checkCreateDisable(); // Only check if needed
+            if(!newValue.matches("\\d*")) {
+                priceTextField.textProperty().setValue(oldValue); // Only allows numbers
+            } else {
+                if(newValue.length() > 1 && newValue.charAt(0) == '0') { // Remove 0 if number > 0
+                    priceTextField.textProperty().setValue(newValue.substring(1));
+                }
+                checkCreateDisable(); // Only check if needed
+            }
         }));
 
         // Hour selectors
