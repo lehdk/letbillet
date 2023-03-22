@@ -3,7 +3,6 @@ package dk.letbillet.presentation.controller;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import dk.letbillet.Main;
-import dk.letbillet.presentation.model.RoleModel;
 import dk.letbillet.presentation.model.UserModel;
 import dk.letbillet.util.LogoLoader;
 import javafx.fxml.FXML;
@@ -15,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -48,11 +48,9 @@ public class LoginController implements Initializable {
     @FXML
     public Label badUsernameOrPasswordLabel;
 
-    private final RoleModel roleModel;
     private final UserModel userModel;
 
     public LoginController() {
-        roleModel = new RoleModel();
         userModel = new UserModel();
     }
 
@@ -68,6 +66,14 @@ public class LoginController implements Initializable {
 
         usernameField.textProperty().addListener(((observable, oldValue, newValue) -> setLoginButtonEnableState()));
         passwordField.textProperty().addListener(((observable, oldValue, newValue) -> setLoginButtonEnableState()));
+
+        usernameField.setOnKeyPressed(event -> {
+            if(event.getCode().equals(KeyCode.ENTER)) loginButton.fire();
+        });
+
+        passwordField.setOnKeyPressed(event -> {
+            if(event.getCode().equals(KeyCode.ENTER)) loginButton.fire();
+        });
 
         setLoginButtonEnableState();
     }
