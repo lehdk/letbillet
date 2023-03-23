@@ -67,7 +67,7 @@
             <Region HBox.hgrow="ALWAYS" />
             <Button fx:id="ticketButton" mnemonicParsing="false" styleClass="button" text="Ticket" />
             <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#handleDeleteEvent" styleClass="button" text="Delete" />
-            <Button fx:id="editButton" mnemonicParsing="false" styleClass="button" text="Edit" />
+            <Button fx:id="editButton" mnemonicParsing="false" onAction="#handleEditButton" styleClass="button" text="Edit" />
             <Button fx:id="closeButton" mnemonicParsing="false" onAction="#handleCloseButton" styleClass="button" text="Close" />
          </children>
          <padding>

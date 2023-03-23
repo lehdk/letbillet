@@ -7,17 +7,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class EventModel {
 
     private final EventManager eventManager;
 
-    private final ObservableList<Event> eventObservableList;
+    private ObservableList<Event> eventObservableList;
 
     public EventModel() {
         eventManager = new EventManager();
 
-        eventObservableList = FXCollections.observableList(eventManager.getAllEvents());
+        eventObservableList = FXCollections.observableArrayList(eventManager.getAllEvents());
     }
 
     public ObservableList<Event> getEventObservableList() {
@@ -38,5 +39,28 @@ public class EventModel {
         if(wasDeleted) {
             eventObservableList.remove(event);
         }
+    }
+
+    public boolean editEvent(int eventId, EventDTO result) throws SQLException {
+        boolean wasEdited = eventManager.editEvent(eventId, result);
+
+        if(!wasEdited) return false;
+
+        Event event = eventObservableList.stream().filter(e -> e.getId() == eventId).findFirst().orElseGet(null);
+
+        int index = eventObservableList.indexOf(event);
+
+        if(event != null) {
+            event.setName(result.getName());
+            event.setLocation(result.getLocation());
+            event.setStart(result.getStart());
+            event.setEnd(result.getEnd());
+            event.setPrice(result.getPrice());
+            event.setNotes(result.getNotes());
+        }
+
+        eventObservableList.set(index, event);
+
+        return true;
     }
 }

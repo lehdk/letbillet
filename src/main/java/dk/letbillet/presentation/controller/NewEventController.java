@@ -1,5 +1,6 @@
 package dk.letbillet.presentation.controller;
 
+import dk.letbillet.entity.Event;
 import dk.letbillet.entity.EventDTO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,6 +9,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class NewEventController implements Initializable {
@@ -32,6 +34,8 @@ public class NewEventController implements Initializable {
     public ChoiceBox<Integer> endHChoiceBox;
     @FXML
     public ChoiceBox<Integer> endMChoiceBox;
+    @FXML
+    public Label headline;
     @FXML
     private EventDTO result;
     @FXML
@@ -82,15 +86,42 @@ public class NewEventController implements Initializable {
         endMChoiceBox.setValue(null);
     }
 
+    public void editEvent(Event event) {
+        result = new EventDTO(event.getName(), event.getLocation(), event.getNotes(), event.getStart(), event.getEnd(), event.getPrice());
+        createButton.setText("Save");
+        headline.setText("Edit event");
+
+        nameTextField.setText(event.getName());
+
+        var startDate = event.getStart();
+        startDatePicker.setValue(LocalDate.of(startDate.getYear(), startDate.getMonth(), startDate.getDate()));
+        startHChoiceBox.setValue(startDate.getHours());
+        startMChoiceBox.setValue(startDate.getMinutes());
+
+        var endDate = event.getEnd();
+        if(endDate != null) {
+            endDatePicker.setValue(LocalDate.of(endDate.getYear(), endDate.getMonth(), endDate.getDate()));
+            endHChoiceBox.setValue(endDate.getHours());
+            endMChoiceBox.setValue(endDate.getMinutes());
+        }
+
+        locationTextField.setText(event.getLocation());
+        priceTextField.setText(event.getPrice() + "");
+        notesTextField.setText(event.getNotes());
+    }
+
     public void handleCancelButton() {
         result = null;
         Stage popupStage = (Stage) cancelButton.getScene().getWindow();
         popupStage.close();
     }
 
-    public void handleCreateButton() {
+    public void handleSave() {
         String notes = null;
-        if(notesTextField.textProperty().getValue().trim().length() > 0) notes = notesTextField.textProperty().getValue().trim();
+
+        if(notesTextField.textProperty().getValue() != null && notesTextField.textProperty().getValue().trim().length() > 0) {
+            notes = notesTextField.textProperty().getValue().trim();
+        }
 
         int price = 0;
         try {

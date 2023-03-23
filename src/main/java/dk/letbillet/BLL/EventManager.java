@@ -26,4 +26,8 @@ public class EventManager {
     public boolean deleteEvent(Event event) throws SQLException {
         return eventDAO.deleteEvent(event);
     }
+
+    public boolean editEvent(int eventId, EventDTO eventDTO) throws SQLException {
+        return eventDAO.editEvent(eventId, eventDTO);
+    }
 }

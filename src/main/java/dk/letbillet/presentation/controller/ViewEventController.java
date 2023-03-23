@@ -1,14 +1,23 @@
 package dk.letbillet.presentation.controller;
 
+import dk.letbillet.Main;
 import dk.letbillet.entity.Event;
+import dk.letbillet.entity.EventDTO;
 import dk.letbillet.presentation.model.EventModel;
 import dk.letbillet.services.UserService;
+import dk.letbillet.util.LogoLoader;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -56,37 +65,40 @@ public class ViewEventController implements Initializable {
 
     public void setCurrentEvent(Event event) {
         currentEvent = event;
+        updateEventShown();
+    }
 
-        eventNameLabel.textProperty().setValue(event.getName());
-        locationLabel.textProperty().setValue(event.getLocation());
-        startsAtLabel.textProperty().setValue(event.getStart().toString());
+    private void updateEventShown() {
+        eventNameLabel.textProperty().setValue(currentEvent.getName());
+        locationLabel.textProperty().setValue(currentEvent.getLocation());
+        startsAtLabel.textProperty().setValue(currentEvent.getStart().toString());
 
-        if(event.getEnd() == null) {
+        if(currentEvent.getEnd() == null) {
             endsAtLabel.textProperty().setValue("No end date set");
             endsAtLabel.getStyleClass().add("grayed");
         } else {
-            endsAtLabel.textProperty().setValue(event.getEnd().toString());
+            endsAtLabel.textProperty().setValue(currentEvent.getEnd().toString());
         }
 
-        if(event.getPrice() == 0) {
+        if(currentEvent.getPrice() == 0) {
             priceLabel.textProperty().setValue("Free");
             priceLabel.getStyleClass().add("grayed");
         } else {
-            priceLabel.textProperty().setValue(event.getPrice() + "");
+            priceLabel.textProperty().setValue(currentEvent.getPrice() + "");
         }
 
-        if(event.getTicketsSold() == 0) {
+        if(currentEvent.getTicketsSold() == 0) {
             ticketsSoldLabel.textProperty().setValue("No tickets sold");
             ticketsSoldLabel.getStyleClass().add("grayed");
         } else {
-            ticketsSoldLabel.textProperty().setValue(event.getTicketsSold() + "");
+            ticketsSoldLabel.textProperty().setValue(currentEvent.getTicketsSold() + "");
         }
 
-        if(event.getNotes() == null || event.getNotes().isEmpty()) {
+        if(currentEvent.getNotes() == null || currentEvent.getNotes().isEmpty()) {
             notesLabel.textProperty().setValue("No notes");
             notesLabel.getStyleClass().add("grayed");
         } else {
-            notesLabel.textProperty().setValue(event.getNotes());
+            notesLabel.textProperty().setValue(currentEvent.getNotes());
         }
     }
 
@@ -101,6 +113,34 @@ public class ViewEventController implements Initializable {
             handleCloseButton();
         } catch (SQLException e) {
             System.out.println("Could not delete event!");
+        }
+    }
+
+    public void handleEditButton() throws IOException {
+        Stage popupStage = new Stage();
+
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("presentation/view/NewEvent.fxml"));
+        Parent root = loader.load();
+        NewEventController controller = loader.getController();
+        controller.editEvent(currentEvent);
+        Scene popupScene = new Scene(root);
+
+        popupStage.setScene(popupScene);
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.initStyle(StageStyle.UNDECORATED);
+
+        LogoLoader.addLogoToStage(popupStage);
+
+        popupStage.showAndWait();
+
+        EventDTO result = controller.getResult();
+        if(result == null) return; // The cancel button has been pressed
+
+        try {
+            eventModel.editEvent(currentEvent.getId(), result);
+            updateEventShown();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
