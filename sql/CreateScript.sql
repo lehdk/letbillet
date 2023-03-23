@@ -29,8 +29,8 @@ CREATE TABLE [Event] (
     [Name] NVARCHAR(256) NOT NULL,
     [Location] NVARCHAR(256) NOT NULL,
     [Notes] NVARCHAR(MAX),
-    [StartTime] DATETIME NOT NULL,
-    [EndTime] DATETIME,
+    [StartTime] DATETIME2 NOT NULL,
+    [EndTime] DATETIME2,
     [Price] INT NOT NULL DEFAULT 0,
     [CreatedBy] INT FOREIGN KEY REFERENCES [User](Id)
     -- location guidence

@@ -35,7 +35,7 @@
             <HBox.margin>
                <Insets bottom="5.0" top="5.0" />
             </HBox.margin></Region>
-      <Button fx:id="newEventButton" onAction="#handleNewEvent" mnemonicParsing="false" text="New event" />
+      <Button fx:id="newEventButton" mnemonicParsing="false" onAction="#handleNewEvent" text="New event" />
     </children>
       <VBox.margin>
          <Insets bottom="5.0" top="5.0" />

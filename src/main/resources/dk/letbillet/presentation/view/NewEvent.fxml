@@ -76,7 +76,7 @@
       <HBox alignment="TOP_CENTER" spacing="30.0">
          <children>
             <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" text="Cancel" />
-            <Button fx:id="createButton" disable="true" mnemonicParsing="false" onAction="#handleCreateButton" text="Create" />
+            <Button fx:id="createButton" disable="true" mnemonicParsing="false" onAction="#handleSave" text="Create" />
          </children>
       </HBox>
    </children>
