@@ -73,6 +73,10 @@ public class ViewEventController implements Initializable {
         locationLabel.textProperty().setValue(currentEvent.getLocation());
         startsAtLabel.textProperty().setValue(currentEvent.getStart().toString());
 
+        if(currentEvent.getTicketsSold() != 0) {
+            deleteButton.setDisable(true);
+        }
+
         if(currentEvent.getEnd() == null) {
             endsAtLabel.textProperty().setValue("No end date set");
             endsAtLabel.getStyleClass().add("grayed");
@@ -108,6 +112,11 @@ public class ViewEventController implements Initializable {
     }
 
     public void handleDeleteEvent() {
+        if(currentEvent.getTicketsSold() != 0) {
+            System.out.println("Can not delete event since tickets has been sold!");
+            return;
+        }
+
         try {
             eventModel.deleteEvent(currentEvent);
             handleCloseButton();
