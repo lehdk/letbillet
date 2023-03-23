@@ -42,3 +42,4 @@ build/
 /src/main/resources/dk/letbillet/config.properties
 /.idea/uiDesigner.xml
 /.idea/inspectionProfiles/Project_Default.xml
+.idea/misc.xml

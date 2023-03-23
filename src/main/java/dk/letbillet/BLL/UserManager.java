@@ -1,8 +1,14 @@
 package dk.letbillet.BLL;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dk.letbillet.database.UserDatabaseDAO;
+import dk.letbillet.entity.Event;
 import dk.letbillet.entity.User;
+import dk.letbillet.entity.UserDTO;
 import dk.letbillet.services.UserService;
+
+import java.sql.SQLException;
+import java.util.List;
 
 public class UserManager {
 
@@ -34,4 +40,11 @@ public class UserManager {
         return true;
     }
 
+    public User createUser(UserDTO user) throws SQLException {
+        return userDAO.createUser(user);
+    }
+
+    public List<User> getAllUsers() {
+        return  userDAO.getAllUsers();
+    }
 }

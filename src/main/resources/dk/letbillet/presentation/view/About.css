@@ -1,0 +1,7 @@
+#appPane {
+    -fx-background-color: #13005A;
+}
+
+.text {
+    -fx-text-fill: #FFFFFF !important;
+}

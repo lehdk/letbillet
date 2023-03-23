@@ -3,6 +3,7 @@ package dk.letbillet.presentation.controller;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import dk.letbillet.Main;
+import dk.letbillet.presentation.model.UserModel;
 import dk.letbillet.services.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,7 +42,10 @@ public class ApplicationController implements Initializable {
     @FXML
     public Button settingsButton;
 
+    private UserModel userModel;
+
     public ApplicationController() {
+        userModel = new UserModel();
     }
 
     @Override
@@ -120,7 +124,19 @@ public class ApplicationController implements Initializable {
     }
 
     public void handleShowUsers() {
-        loadContent("Users");
+        try {
+            FXMLLoader content = new FXMLLoader(Main.class.getResource("presentation/view/Users.fxml"));
+            Node node = content.load();
+            UserController controller = content.getController();
+            controller.setUserModel(userModel);
+            AnchorPane.setRightAnchor(node, 0D);
+            AnchorPane.setTopAnchor(node, 0D);
+            AnchorPane.setBottomAnchor(node, 0D);
+            contentPane.getChildren().setAll(node);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void handleShowAbout() {

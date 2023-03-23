@@ -4,12 +4,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" style="-fx-background-color: RED;" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox stylesheets="@About.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="About" wrappingWidth="589.13671875" VBox.vgrow="ALWAYS">
+        <Text styleClass="text" strokeType="OUTSIDE" strokeWidth="0.0" text="About Letbillet" wrappingWidth="937.13671875" VBox.vgrow="ALWAYS">
             <font>
                 <Font size="86.0" />
             </font>
         </Text>
+      <Text styleClass="text" strokeType="OUTSIDE" strokeWidth="0.0" text="Bla bla bla" wrappingWidth="308.13671875">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
     </children>
 </VBox>
