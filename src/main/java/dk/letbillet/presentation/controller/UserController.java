@@ -31,6 +31,7 @@ import java.util.ResourceBundle;
 
 public class UserController implements Initializable {
 
+    public Button deleteUserButton;
     private UserModel userModel;
     @FXML
     public TableColumn<User, String> usernameColumn;
@@ -72,4 +73,15 @@ public class UserController implements Initializable {
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("Username"));
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("Role"));
     }
+
+    public void handleDeleteUser() {
+        User selectedUser = userTableView.getSelectionModel().getSelectedItem();
+        try {
+            userModel.deleteUser(selectedUser);
+            userModel.getUserObservableList().remove(selectedUser);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

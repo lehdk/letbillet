@@ -36,6 +36,10 @@ public class UserModel {
         return newUser;
     }
 
+    public void deleteUser(User user) throws SQLException {
+        userManager.deleteUser(user);
+    }
+
     public ObservableList<User> getUserObservableList() {
         return userObservableList;
     }

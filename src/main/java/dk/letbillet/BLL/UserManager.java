@@ -44,6 +44,10 @@ public class UserManager {
         return userDAO.createUser(user);
     }
 
+    public void deleteUser(User user) throws SQLException {
+        userDAO.deleteUser(user);
+    }
+
     public List<User> getAllUsers() {
         return  userDAO.getAllUsers();
     }

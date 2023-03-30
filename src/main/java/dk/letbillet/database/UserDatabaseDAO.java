@@ -100,5 +100,15 @@ public class UserDatabaseDAO {
         return null;
     }
 
+    public void deleteUser(User user) throws SQLException {
+        try (Connection connection = DatabaseConnectionHandler.getInstance().getConnection()) {
+            String sql = "DELETE FROM [User] WHERE [Id] = ?";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, user.getId());
+
+            statement.executeUpdate();
+        }
+    }
 
 }
