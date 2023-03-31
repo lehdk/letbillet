@@ -6,7 +6,9 @@ import dk.letbillet.Main;
 import dk.letbillet.entity.Event;
 import dk.letbillet.entity.EventDTO;
 import dk.letbillet.entity.Role;
+import dk.letbillet.entity.Ticket;
 import dk.letbillet.presentation.model.EventModel;
+import dk.letbillet.presentation.model.TicketModel;
 import dk.letbillet.services.UserService;
 import dk.letbillet.util.EventLoader;
 import dk.letbillet.util.LogoLoader;
@@ -32,6 +34,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class EventsController implements Initializable {
+
+    private TicketModel ticketModel;
 
     private final EventModel eventModel;
 
@@ -63,7 +67,8 @@ public class EventsController implements Initializable {
         tableView.setOnMouseClicked(mouseEvent -> {
             if(mouseEvent.getClickCount() == 2) {
                 Event event = tableView.getSelectionModel().getSelectedItem();
-                EventLoader.openEventWindow(event, eventModel);
+                EventLoader.openEventWindow(event, eventModel, ticketModel);
+                tableView.refresh();
             }
         });
 
@@ -104,6 +109,10 @@ public class EventsController implements Initializable {
         }
     }
 
+    public void setTicketModel(TicketModel ticketModel) {
+        this.ticketModel = ticketModel;
+    }
+
     public void handleNewEvent() throws IOException {
         Stage popupStage = new Stage();
 
@@ -125,7 +134,7 @@ public class EventsController implements Initializable {
 
         try {
             Event event = eventModel.createEvent(result);
-            EventLoader.openEventWindow(event, eventModel);
+            EventLoader.openEventWindow(event, eventModel, ticketModel);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

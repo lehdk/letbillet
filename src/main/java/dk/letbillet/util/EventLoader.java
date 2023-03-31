@@ -4,6 +4,7 @@ import dk.letbillet.Main;
 import dk.letbillet.entity.Event;
 import dk.letbillet.presentation.controller.ViewEventController;
 import dk.letbillet.presentation.model.EventModel;
+import dk.letbillet.presentation.model.TicketModel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,7 +16,7 @@ import java.io.IOException;
 
 public class EventLoader {
 
-    public static void openEventWindow(Event event, EventModel eventModel) {
+    public static void openEventWindow(Event event, EventModel eventModel, TicketModel ticketModel) {
         if(event == null) return;
 
         try {
@@ -25,6 +26,7 @@ public class EventLoader {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("presentation/view/ViewEvent.fxml"));
             Parent root = loader.load();
             ViewEventController controller = loader.getController();
+            controller.setTicketModel(ticketModel);
             controller.setEventModel(eventModel);
             controller.setCurrentEvent(event);
 

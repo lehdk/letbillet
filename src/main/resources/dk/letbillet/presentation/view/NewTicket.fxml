@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="pane" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" stylesheets="@NewTicket.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.letbillet.presentation.controller.NewTicketController">
+   <children>
+      <Label text="New Ticket" textFill="WHITE">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <GridPane fx:id="grid">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Event" textFill="WHITE" />
+            <Label fx:id="eventNameLabel" textFill="WHITE" GridPane.columnIndex="1" />
+            <Label text="Customer name" textFill="WHITE" GridPane.rowIndex="1" />
+            <Label text="Customer email" textFill="WHITE" GridPane.rowIndex="2" />
+            <TextField fx:id="customerNameText" promptText="Anonymous" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="customerEmailText" promptText="Anonymous" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Amount" textFill="WHITE" GridPane.rowIndex="3" />
+            <TextField fx:id="amountLabel" text="1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <HBox fx:id="buttonBox" alignment="CENTER" spacing="10.0">
+         <children>
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+            <Button fx:id="createButton" mnemonicParsing="false" onAction="#handleCreate" text="Create" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
