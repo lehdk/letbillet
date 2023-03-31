@@ -40,8 +40,9 @@ CREATE TABLE [Ticket] (
     [Id] INT PRIMARY KEY IDENTITY(1, 1) NOT NULL,
     [Guid] UNIQUEIDENTIFIER DEFAULT NEWID(),
     [IssuedAt] DATETIME DEFAULT GETUTCDATE(),
+    [TicketUsed] BIT DEFAULT 0,
     [CustomerId] INT FOREIGN KEY REFERENCES [Customer](Id),
-    [EventId] INT FOREIGN KEY REFERENCES [Event](Id),
+    [EventId] INT FOREIGN KEY REFERENCES [Event](Id)
 );
 
 -- Insert default data

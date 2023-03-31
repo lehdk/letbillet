@@ -3,6 +3,7 @@ package dk.letbillet.presentation.controller;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import dk.letbillet.Main;
+import dk.letbillet.presentation.model.TicketModel;
 import dk.letbillet.presentation.model.UserModel;
 import dk.letbillet.services.UserService;
 import javafx.fxml.FXML;
@@ -43,9 +44,11 @@ public class ApplicationController implements Initializable {
     public Button settingsButton;
 
     private UserModel userModel;
+    private TicketModel ticketModel;
 
     public ApplicationController() {
         userModel = new UserModel();
+        ticketModel = new TicketModel();
     }
 
     @Override
@@ -120,7 +123,18 @@ public class ApplicationController implements Initializable {
     }
 
     public void handleShowEvents() {
-        loadContent("Events");
+        try {
+            FXMLLoader content = new FXMLLoader(Main.class.getResource("presentation/view/Events.fxml"));
+            Node node = content.load();
+            EventsController controller = content.getController();
+            controller.setTicketModel(ticketModel);
+            AnchorPane.setRightAnchor(node, 0D);
+            AnchorPane.setTopAnchor(node, 0D);
+            AnchorPane.setBottomAnchor(node, 0D);
+            contentPane.getChildren().setAll(node);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void handleShowUsers() {
@@ -133,7 +147,6 @@ public class ApplicationController implements Initializable {
             AnchorPane.setTopAnchor(node, 0D);
             AnchorPane.setBottomAnchor(node, 0D);
             contentPane.getChildren().setAll(node);
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -3,7 +3,9 @@ package dk.letbillet.presentation.controller;
 import dk.letbillet.Main;
 import dk.letbillet.entity.Event;
 import dk.letbillet.entity.EventDTO;
+import dk.letbillet.entity.TicketDTO;
 import dk.letbillet.presentation.model.EventModel;
+import dk.letbillet.presentation.model.TicketModel;
 import dk.letbillet.services.UserService;
 import dk.letbillet.util.LogoLoader;
 import javafx.fxml.FXML;
@@ -23,6 +25,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ViewEventController implements Initializable {
+
+    private TicketModel ticketModel;
 
     @FXML
     public Label eventNameLabel;
@@ -57,6 +61,10 @@ public class ViewEventController implements Initializable {
             ticketButton.setDisable(true);
             editButton.setDisable(true);
         }
+    }
+
+    public void setTicketModel(TicketModel ticketModel) {
+        this.ticketModel = ticketModel;
     }
 
     public void setEventModel(EventModel model) {
@@ -149,6 +157,36 @@ public class ViewEventController implements Initializable {
             eventModel.editEvent(currentEvent.getId(), result);
             updateEventShown();
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void handleTicketButton() throws IOException {
+
+        Stage popupStage = new Stage();
+
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("presentation/view/NewTicket.fxml"));
+        Parent root = loader.load();
+        NewTicketController controller = loader.getController();
+        controller.init(ticketModel, currentEvent);
+        Scene popupScene = new Scene(root);
+
+        popupStage.setScene(popupScene);
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.initStyle(StageStyle.UNDECORATED);
+
+        LogoLoader.addLogoToStage(popupStage);
+
+        popupStage.showAndWait();
+
+        TicketDTO result = controller.getResult();
+        if(result == null) return; // The cancel button has been pressed
+
+        try {
+            var ticketIds = ticketModel.createTicket(result); // TODO: Do something with the tickets
+            ticketsSoldLabel.setText(currentEvent.getTicketsSold() + "");
+        } catch (SQLException e) {
+             System.out.println("Could not create tickets!");
             throw new RuntimeException(e);
         }
     }
