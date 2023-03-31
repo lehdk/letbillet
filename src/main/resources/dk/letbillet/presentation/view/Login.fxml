@@ -28,7 +28,7 @@
             <Font size="13.0" />
          </font></PasswordField>
       <Button fx:id="loginButton" disable="true" layoutX="165.0" layoutY="213.0" mnemonicParsing="false" onAction="#handleLogin" text="Login" />
-      <Button layoutX="122.0" layoutY="254.0" mnemonicParsing="false" text="Continue as customer" />
+      <Button fx:id="customerButton" layoutX="122.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleCustomerLogin" text="Continue as customer" />
       <Button fx:id="exitButton" layoutX="349.0" layoutY="2.0" mnemonicParsing="false" onAction="#handleExit" text="X">
          <font>
             <Font size="17.0" />

@@ -5,6 +5,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import dk.letbillet.Main;
 import dk.letbillet.presentation.model.UserModel;
 import dk.letbillet.util.LogoLoader;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,6 +28,7 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
+    public Button customerButton;
     private double xOffset = 0; // Used for drag window
     private double yOffset = 0; // Used for drag window
 
@@ -102,6 +104,32 @@ public class LoginController implements Initializable {
 
         try {
             var loader = new FXMLLoader(Main.class.getResource("presentation/view/Application.fxml"));
+            Parent root1 = loader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle("Letbillet");
+            stage.setScene(new Scene(root1));
+            pane.getScene().getWindow().hide();
+
+            root1.setOnMousePressed(event -> {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            });
+            root1.setOnMouseDragged(event -> {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+            });
+            LogoLoader.addLogoToStage(stage);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void handleCustomerLogin() {
+        try {
+            var loader = new FXMLLoader(Main.class.getResource("presentation/view/CustomerApp.fxml"));
             Parent root1 = loader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
