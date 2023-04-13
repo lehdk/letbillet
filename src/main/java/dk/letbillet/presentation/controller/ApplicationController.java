@@ -5,6 +5,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import dk.letbillet.Main;
 import dk.letbillet.presentation.model.TicketModel;
 import dk.letbillet.presentation.model.UserModel;
+import dk.letbillet.presentation.model.VoucherModel;
 import dk.letbillet.services.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +32,8 @@ public class ApplicationController implements Initializable {
     @FXML
     public Button eventButton;
     @FXML
+    public Button voucherButton;
+    @FXML
     public Button userButton;
     @FXML
     public Button aboutButton;
@@ -43,12 +46,14 @@ public class ApplicationController implements Initializable {
     @FXML
     public Button settingsButton;
 
-    private UserModel userModel;
-    private TicketModel ticketModel;
+    private final UserModel userModel;
+    private final TicketModel ticketModel;
+    private final VoucherModel voucherModel;
 
     public ApplicationController() {
         userModel = new UserModel();
         ticketModel = new TicketModel();
+        voucherModel = new VoucherModel();
     }
 
     @Override
@@ -74,18 +79,22 @@ public class ApplicationController implements Initializable {
 
         // Set what you are able to do depending on what role you have
         int userRole = UserService.getInstance().getLoggedInUser().getRole().getId();
-        if(userRole == 2) {
+        if(userRole == 1) {
+          voucherButton.setDisable(true);
+        } else if(userRole == 2) {
            userButton.setDisable(true);
         }
 
         // Icons
         try {
             Text eventIcon = GlyphsDude.createIcon(FontAwesomeIcons.CALENDAR, "20pt");
+            Text voucherIcon = GlyphsDude.createIcon(FontAwesomeIcons.TICKET, "20pt");
             Text usersIcon = GlyphsDude.createIcon(FontAwesomeIcons.USERS, "20pt");
             Text settingsIcon = GlyphsDude.createIcon(FontAwesomeIcons.GEAR, "20pt");
             Text aboutIcon = GlyphsDude.createIcon(FontAwesomeIcons.INFO, "20pt");
 
             setButtonIcon(eventIcon, eventButton);
+            setButtonIcon(voucherIcon, voucherButton);
             setButtonIcon(usersIcon, userButton);
             setButtonIcon(settingsIcon, settingsButton);
             setButtonIcon(aboutIcon, aboutButton);
@@ -98,19 +107,6 @@ public class ApplicationController implements Initializable {
         button.setContentDisplay(ContentDisplay.LEFT);
         button.setGraphicTextGap(10);
         button.setGraphic(icon);
-    }
-
-    private void loadContent(String filename) {
-        try {
-            Node content = FXMLLoader.load(Main.class.getResource("presentation/view/"+filename+".fxml"));
-            AnchorPane.setRightAnchor(content, 0D);
-            AnchorPane.setTopAnchor(content, 0D);
-            AnchorPane.setBottomAnchor(content, 0D);
-            contentPane.getChildren().setAll(content);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public void exitApplication() {
@@ -137,6 +133,21 @@ public class ApplicationController implements Initializable {
         }
     }
 
+    public void handleShowVouchers() {
+        try {
+            FXMLLoader content = new FXMLLoader(Main.class.getResource("presentation/view/Vouchers.fxml"));
+            Node node = content.load();
+            VouchersController controller = content.getController();
+            controller.init(voucherModel);
+            AnchorPane.setRightAnchor(node, 0D);
+            AnchorPane.setTopAnchor(node, 0D);
+            AnchorPane.setBottomAnchor(node, 0D);
+            contentPane.getChildren().setAll(node);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void handleShowUsers() {
         try {
             FXMLLoader content = new FXMLLoader(Main.class.getResource("presentation/view/Users.fxml"));
@@ -153,6 +164,15 @@ public class ApplicationController implements Initializable {
     }
 
     public void handleShowAbout() {
-        loadContent("About");
+        try {
+            FXMLLoader content = new FXMLLoader(Main.class.getResource("presentation/view/About.fxml"));
+            Node node = content.load();
+            AnchorPane.setRightAnchor(node, 0D);
+            AnchorPane.setTopAnchor(node, 0D);
+            AnchorPane.setBottomAnchor(node, 0D);
+            contentPane.getChildren().setAll(node);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

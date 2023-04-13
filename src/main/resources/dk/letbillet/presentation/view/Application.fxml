@@ -29,6 +29,7 @@
          <VBox fx:id="menuBox" prefWidth="200.0">
             <children>
                <Button fx:id="eventButton" mnemonicParsing="false" onAction="#handleShowEvents" prefWidth="10000.0" text="Events" />
+               <Button fx:id="voucherButton" mnemonicParsing="false" onAction="#handleShowVouchers" prefWidth="10000.0" text="Vouchers"/>
                <Button fx:id="userButton" mnemonicParsing="false" onAction="#handleShowUsers" prefWidth="10000.0" text="Users" />
                <Button fx:id="settingsButton" mnemonicParsing="false" prefWidth="10000.0" text="Settings" />
                <Button fx:id="aboutButton" mnemonicParsing="false" onAction="#handleShowAbout" prefWidth="10000.0" text="About" />
