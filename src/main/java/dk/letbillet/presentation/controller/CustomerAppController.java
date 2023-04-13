@@ -4,17 +4,19 @@ import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import dk.letbillet.entity.Event;
 import dk.letbillet.presentation.model.EventModel;
+import dk.letbillet.presentation.model.TicketModel;
+import dk.letbillet.util.EventLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CustomerAppController implements Initializable {
+    private TicketModel ticketModel;
     private final EventModel eventModel;
     public Button minimizeButton;
     public Button exitButton;
@@ -46,6 +48,15 @@ public class CustomerAppController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ticketModel = new TicketModel();
+        tableView.setOnMouseClicked(mouseEvent -> {
+            if(mouseEvent.getClickCount() == 2) {
+                Event selectedEvent = (Event) tableView.getSelectionModel().getSelectedItem();
+                EventLoader.openEventWindow(selectedEvent, eventModel, ticketModel);
+                tableView.refresh();
+            }
+        });
+
         var events = eventModel.getEventObservableList();
         eventColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
         startColumn.setCellValueFactory(new PropertyValueFactory<>("Start"));

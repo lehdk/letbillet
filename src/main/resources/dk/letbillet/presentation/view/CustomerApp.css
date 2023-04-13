@@ -1,0 +1,18 @@
+.pane {
+    -fx-background-color: #13003A;
+}
+.table-view {
+    -fx-background-color: Black;
+    -fx-text-fill: Black;
+}
+
+.tableColumn {
+    -fx-background-color: #7A631F;
+    -fx-text-fill: BLACK;
+    -fx-font-size: 12pt;
+    -fx-border-width: 1px;
+    -fx-border-color: BLACK;
+}
+.table-view .column-header > .label {
+    -fx-text-fill: BLACK;
+}

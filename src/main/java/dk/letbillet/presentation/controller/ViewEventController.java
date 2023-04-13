@@ -57,10 +57,11 @@ public class ViewEventController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(UserService.getInstance().getLoggedInUser().getRole().getRoleName().equals("Admin")) {
+        if(UserService.getInstance().getLoggedInUser() != null && UserService.getInstance().getLoggedInUser().getRole().getRoleName().equals("Admin")) {
             ticketButton.setDisable(true);
             editButton.setDisable(true);
         }
+
     }
 
     public void setTicketModel(TicketModel ticketModel) {
