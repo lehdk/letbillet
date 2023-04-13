@@ -36,6 +36,10 @@ public class Ticket {
         return customerEmail;
     }
 
+    public String getGuid() {
+        return guid;
+    }
+
     public Event getEvent() {
         return event;
     }
