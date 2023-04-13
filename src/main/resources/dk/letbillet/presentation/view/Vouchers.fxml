@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox stylesheets="@Events.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.letbillet.presentation.controller.VouchersController">
+    <HBox prefWidth="200.0">
+        <children>
+            <Region HBox.hgrow="ALWAYS">
+                <HBox.margin>
+                    <Insets bottom="5.0" />
+                </HBox.margin></Region>
+            <TextField fx:id="searchField" prefWidth="200.0" promptText="Search..." />
+        </children>
+        <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+        </VBox.margin>
+    </HBox>
+    <ListView fx:id="listView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" stylesheets="@Vouchers.css">
+
+    </ListView>
+    <HBox prefWidth="200.0">
+        <children>
+            <Region HBox.hgrow="ALWAYS">
+                <HBox.margin>
+                    <Insets bottom="5.0" top="5.0" />
+                </HBox.margin></Region>
+            <Button fx:id="newVoucherButton" mnemonicParsing="false" onAction="#handleNewVoucher" text="New Voucher" />
+        </children>
+        <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+        </VBox.margin>
+    </HBox>
+</VBox>

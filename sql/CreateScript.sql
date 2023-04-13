@@ -5,6 +5,8 @@ DROP TABLE IF EXISTS [Event];
 DROP TABLE IF EXISTS [User];
 DROP TABLE IF EXISTS [Role];
 DROP TABLE IF EXISTS [Customer];
+DROP TABLE IF EXISTS [IssuedVoucher]
+DROP TABLE IF EXISTS [VoucherTypes]
 
 CREATE TABLE [Role] (
     [Id] INT PRIMARY KEY IDENTITY(1, 1) NOT NULL,
@@ -45,6 +47,17 @@ CREATE TABLE [Ticket] (
     [EventId] INT FOREIGN KEY REFERENCES [Event](Id)
 );
 
+CREATE TABLE [VoucherTypes] (
+    [Id] INT PRIMARY KEY IDENTITY(1, 1) NOT NULL,
+    [Name] NVARCHAR(50) NOT NULL UNIQUE,
+);
+
+CREATE TABLE [IssuedVoucher] (
+    [Id] INT PRIMARY KEY IDENTITY(1, 1) NOT NULL,
+    [Guid] UNIQUEIDENTIFIER DEFAULT NEWID(),
+    [VoucherType] INT FOREIGN KEY REFERENCES [VoucherTypes](Id)
+);
+
 -- Insert default data
 
 INSERT INTO [Role] ([Name]) VALUES ('Admin'), ('Event Coordinator');
@@ -65,3 +78,6 @@ INSERT INTO [Ticket] ([EventId], [CustomerId]) VALUES
     (1, 1),
     (1, 2),
     (2, 1);
+
+INSERT INTO [VoucherTypes] ([Name]) VALUES ('TEST VOUCHER');
+INSERT INTO [IssuedVoucher] ([VoucherType]) VALUES (1);
