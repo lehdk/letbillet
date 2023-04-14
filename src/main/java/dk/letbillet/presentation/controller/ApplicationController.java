@@ -135,7 +135,7 @@ public class ApplicationController implements Initializable {
 
     public void handleShowVouchers() {
         try {
-            FXMLLoader content = new FXMLLoader(Main.class.getResource("presentation/view/Vouchers.fxml"));
+            FXMLLoader content = new FXMLLoader(Main.class.getResource("presentation/view/vouchers/Vouchers.fxml"));
             Node node = content.load();
             VouchersController controller = content.getController();
             controller.init(voucherModel);
