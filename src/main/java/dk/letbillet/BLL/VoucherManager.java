@@ -18,4 +18,7 @@ public class VoucherManager {
         return databaseDAO.getAllVoucherTypes();
     }
 
+    public VoucherType createVoucher(String name) throws SQLException {
+        return databaseDAO.createVoucherType(name);
+    }
 }

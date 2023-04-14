@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="pane" prefHeight="200.0" prefWidth="375.0" stylesheets="@NewVoucherType.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.letbillet.presentation.controller.NewVoucherTypeController">
+    <children>
+        <Label alignment="CENTER" layoutY="14.0" prefHeight="64.0" prefWidth="375.0" styleClass="white" text="New Voucher Type" textFill="WHITE">
+            <font>
+                <Font size="43.0" />
+            </font></Label>
+        <Label layoutX="14.0" layoutY="108.0" text="Voucher Name" textFill="WHITE">
+            <font>
+                <Font size="18.0" />
+            </font></Label>
+        <TextField fx:id="voucherNameField" layoutX="138.0" layoutY="108.0" prefHeight="27.0" prefWidth="232.0" styleClass="input">
+            <font>
+                <Font size="13.0" />
+            </font></TextField>
+        <Button fx:id="cancelButton" layoutX="87.0" layoutY="150.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+        <Button fx:id="createVoucherButton" layoutX="225.0" layoutY="150.0" mnemonicParsing="false" onAction="#handleCreateVoucher" text="Create" />
+    </children>
+</AnchorPane>
