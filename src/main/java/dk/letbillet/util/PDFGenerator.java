@@ -11,9 +11,9 @@ import java.util.Map;
 public class PDFGenerator {
 
     public static final String TICKET_TEMPLATE = "ticket_template";
+    public static final String VOUCHER_TEMPLATE = "voucher_template";
 
     public static String parseThymeleafTemplate(String template, HashMap<String, String> variables) {
-
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(TemplateMode.HTML);

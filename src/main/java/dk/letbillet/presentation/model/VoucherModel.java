@@ -1,11 +1,13 @@
 package dk.letbillet.presentation.model;
 
 import dk.letbillet.BLL.VoucherManager;
+import dk.letbillet.entity.IssuedVoucher;
 import dk.letbillet.entity.VoucherType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class VoucherModel {
 
@@ -23,13 +25,17 @@ public class VoucherModel {
         return voucherTypeObservableList;
     }
 
-    public VoucherType createVoucher(String name) throws SQLException {
-        VoucherType result = voucherManager.createVoucher(name);
+    public VoucherType createVoucherType(String name) throws SQLException {
+        VoucherType result = voucherManager.createVoucherType(name);
 
         if(result == null) return null;
 
         voucherTypeObservableList.add(result);
 
         return result;
+    }
+
+    public void issueVouchers(VoucherType selectedItem, int amount) throws SQLException {
+        List<IssuedVoucher> vouchers = voucherManager.issueVouchers(selectedItem, amount);
     }
 }
