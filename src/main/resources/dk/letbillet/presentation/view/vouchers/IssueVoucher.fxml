@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="pane" prefHeight="245.0" prefWidth="397.0" stylesheets="@NewVoucherType.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.letbillet.presentation.controller.voucher.IssueVoucherController">
+    <children>
+        <Label alignment="CENTER" layoutY="14.0" prefHeight="64.0" prefWidth="375.0" styleClass="white" text="Issue Voucher" textFill="WHITE">
+            <font>
+                <Font size="43.0" />
+            </font></Label>
+        <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="78.0" text="Voucher Name:" textFill="WHITE">
+            <font>
+                <Font size="18.0" />
+            </font></Label>
+        <Label fx:id="voucherNameLabel" layoutX="148.0" layoutY="78.0" prefHeight="27.0" prefWidth="232.0" textFill="WHITE">
+            <font>
+                <Font size="13.0" />
+            </font></Label>
+        <Button fx:id="cancelButton" layoutX="81.0" layoutY="192.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+        <Button fx:id="createVoucherButton" layoutX="218.0" layoutY="192.0" mnemonicParsing="false" onAction="#handleCreateVoucher" text="Create" />
+      <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="113.0" prefHeight="27.0" prefWidth="123.0" text="Amount:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="amountTextField" layoutX="144.0" layoutY="115.0" prefHeight="25.0" prefWidth="92.0" text="1" />
+    </children>
+</AnchorPane>

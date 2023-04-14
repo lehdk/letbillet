@@ -55,6 +55,7 @@ CREATE TABLE [VoucherTypes] (
 CREATE TABLE [IssuedVoucher] (
     [Id] INT PRIMARY KEY IDENTITY(1, 1) NOT NULL,
     [Guid] UNIQUEIDENTIFIER DEFAULT NEWID(),
+    [VoucherUsed] BIT DEFAULT 0,
     [VoucherType] INT FOREIGN KEY REFERENCES [VoucherTypes](Id)
 );
 

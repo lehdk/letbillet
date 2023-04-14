@@ -1,4 +1,4 @@
-package dk.letbillet.presentation.controller;
+package dk.letbillet.presentation.controller.voucher;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

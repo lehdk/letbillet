@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox stylesheets="@../Events.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.letbillet.presentation.controller.VouchersController">
+<VBox stylesheets="@Vouchers.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.letbillet.presentation.controller.voucher.VouchersController">
     <HBox prefWidth="200.0">
         <children>
             <Region HBox.hgrow="ALWAYS">
@@ -17,7 +17,7 @@
             <Insets bottom="5.0" top="5.0" />
         </VBox.margin>
     </HBox>
-    <ListView fx:id="listView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" stylesheets="@Vouchers.css">
+    <ListView fx:id="listView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" prefWidth="500.0" stylesheets="@Vouchers.css">
 
     </ListView>
     <HBox prefWidth="200.0">
@@ -27,6 +27,10 @@
                     <Insets bottom="5.0" top="5.0" />
                 </HBox.margin></Region>
             <Button fx:id="newVoucherButton" mnemonicParsing="false" onAction="#handleNewVoucher" text="New Voucher" />
+            <Button fx:id="issueVoucherButton" mnemonicParsing="false" onAction="#handleIssueVoucher" text="Issue Voucher">
+            <HBox.margin>
+               <Insets left="10.0" />
+            </HBox.margin></Button>
         </children>
         <VBox.margin>
             <Insets bottom="5.0" top="5.0" />

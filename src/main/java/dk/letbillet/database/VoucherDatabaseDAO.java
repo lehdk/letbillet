@@ -1,10 +1,13 @@
 package dk.letbillet.database;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import dk.letbillet.entity.IssuedVoucher;
+import dk.letbillet.entity.Ticket;
 import dk.letbillet.entity.VoucherType;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class VoucherDatabaseDAO {
 
@@ -51,5 +54,33 @@ public class VoucherDatabaseDAO {
         }
 
         return null;
+    }
+
+    public List<IssuedVoucher> issueVouchers(VoucherType voucherType, int amount) throws SQLException {
+        var vouchers = new ArrayList<IssuedVoucher>(amount);
+
+        try(Connection connection = DatabaseConnectionHandler.getInstance().getConnection()) {
+            StringBuilder sql = new StringBuilder("BEGIN TRANSACTION; INSERT INTO [IssuedVoucher] ([VoucherType]) OUTPUT inserted.* VALUES (?)");
+            sql.append(",(?)".repeat(Math.max(0, amount - 1)));
+            sql.append(" COMMIT TRANSACTION;");
+
+            PreparedStatement statement = connection.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+
+            for (int i = 0; i < amount; i++) {
+                statement.setInt(i + 1, voucherType.getId());
+            }
+
+            var rs = statement.executeQuery();
+
+            while (rs.next()) {
+                vouchers.add(new IssuedVoucher(
+                       rs.getInt("Id"),
+                        rs.getString("Guid"),
+                        voucherType
+                ));
+            }
+
+            return vouchers;
+        }
     }
 }

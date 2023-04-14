@@ -3,6 +3,7 @@ package dk.letbillet.presentation.controller;
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import dk.letbillet.Main;
+import dk.letbillet.presentation.controller.voucher.VouchersController;
 import dk.letbillet.presentation.model.TicketModel;
 import dk.letbillet.presentation.model.UserModel;
 import dk.letbillet.presentation.model.VoucherModel;
