@@ -87,7 +87,7 @@ public class VouchersController implements Initializable {
 
         int amount = controller.getResult();
 
-        if (amount < 0) return;
+        if (amount <= 0) return;
 
         try {
             voucherModel.issueVouchers(selectedItem, amount);
